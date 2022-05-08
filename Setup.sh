@@ -149,7 +149,7 @@ function PYCHARM() {
 }
 
 RUN() {
-	# Later going to invoke functions and redirecting errors to a file to reinstall manually or fix the script
+	# Later going to invoke functions and redirect errors to a file to reinstall manually or fix the script
 	# shutdown -r (Invoke this command at the end to start a new life)
 	echo ""
 }
