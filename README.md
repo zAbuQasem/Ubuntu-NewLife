@@ -5,6 +5,6 @@ I'm writing this script because i hate re-installing everything manually and cus
 ```bash
 git clone https://github.com/zAbuQasem/Ubuntu-NewLife.git
 cd Ubuntu-NewLife
-chmod +x Ubuntu-NewLife
+chmod +x Setup.sh
 ./Setup.sh
 ```
