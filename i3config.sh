@@ -20,6 +20,7 @@ wget https://github.com/barnumbirr/alacritty-debian/releases/download/v0.10.1-1/
 sudo dpkg -i alacritty_0.10.1-1_amd64_bullseye.deb
 sudo apt install -f
 
+git clone https://github.com/hastinbe/i3-volume.git ~/i3-volume
 git clone https://www.github.com/Airblader/i3 i3-gaps
 cd i3-gaps && mkdir -p build && cd build && meson ..
 ninja
@@ -37,6 +38,7 @@ cp .config/compton/compton.conf ~/.config/compton/compton.conf
 cp .config/rofi/config ~/.config/rofi/config
 cp .fehbg ~/.fehbg
 cp .config/i3/clipboard_fix.sh ~/.config/i3/clipboard_fix.sh
+cat ~/i3-volume/i3volume-pulseaudio.conf >> ~/.config/i3/config
 cp -r .wallpaper ~/.wallpaper 
 
 echo "After reboot: Select i3 on login, run lxappearance and select arc-dark"
