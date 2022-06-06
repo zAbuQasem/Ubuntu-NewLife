@@ -166,3 +166,7 @@ bindsym $mod+P exec flameshot gui
 # change keyboard layout english, arabic
 exec "setxkbmap -layout us,ar"
 exec "setxkbmap -option 'grp:alt_shift_toggle'"
+
+# Brightness control
+bindsym XF86MonBrightnessUp exec brightnessctl set +5% # increase screen brightness
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- # decrease screen brightness
