@@ -24,3 +24,8 @@ wget -qO - https://github.com/PRATAP-KUMAR/ubuntu-gdm-set-background/archive/mai
 # To change the image
 sudo ./ubuntu-gdm-set-background --image /PATH
 ```
+## Fix Vmware issues with ubuntu 22.04
+```bash
+chmod +x fix-vmware.sh
+./fix-vmware.sh
+```
