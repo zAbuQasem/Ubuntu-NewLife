@@ -164,7 +164,7 @@ function PYCHARM() {
 }
 
 
-function PYTHONlIBS(){
+function PYTHONLIBS(){
 	echo -e "\n[*] Installing Python3 packages" | tee -a errors.log
 	pip3 install --no-warn-script-location  updog trufflehog rich flask-unsign flask paramiko pyngrok
 } && PYTHONLIBS
