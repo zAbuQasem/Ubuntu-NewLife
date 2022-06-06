@@ -32,6 +32,9 @@ sudo apt install -y build-essential linux-headers-generic dirmngr gnupg apt-tran
 # Adding current user to docker group
 sudo usermod -a -G docker $USER
 
+# Toggle apps by clickig (tested o ubuntu)
+gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize' &>/dev/null
+
 # Installing ngrok
 sudo snap install ngrok
 
