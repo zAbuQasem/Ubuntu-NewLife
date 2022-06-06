@@ -27,7 +27,7 @@ echo yes | sudo add-apt-repository ppa:obsproject/obs-studio # OBS-Studio screen
 #sudo apt update -y 
 
 # Installing alot of things
-sudo apt install -y build-essential linux-headers-generic dirmngr gnupg apt-transport-https ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic audacity telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate atom
+sudo apt install -y build-essential linux-headers-generic dirmngr gnupg apt-transport-https gdebi-core ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic audacity telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate atom
 
 # Adding current user to docker group
 sudo usermod -a -G docker $USER
@@ -184,6 +184,12 @@ function MSTEAMS() {
 	sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
 	sudo apt update -y && sudo apt install -y teams
 } && MSTEAMS
+
+function GITHUBDESKTOP(){
+	echo -e "\n[*] Installing Github desktop" | tee -a errors.log
+	wget https://github.com/shiftkey/desktop/releases/download/release-2.9.3-linux3/GitHubDesktop-linux-2.9.3-linux3.deb
+	echo y | sudo gdebi GitHubDesktop-linux-2.9.3-linux3.deb
+} && GITHUBDESKTOP
 
 RUN() {
 	# Later going to invoke functions and redirect errors to a file to reinstall manually or fix the script
