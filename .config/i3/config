@@ -164,8 +164,8 @@ bindsym $mod+Ctrl+Shift+Left resize grow width 10 px or 10 ppt
 bindsym $mod+P exec flameshot gui
 
 # change keyboard layout english, arabic
-exec "setxkbmap -layout us,ar"
 exec "setxkbmap -option 'grp:alt_shift_toggle'"
+exec "setxkbmap -layout us,ar"
 
 # Brightness control
 bindsym XF86MonBrightnessUp exec brightnessctl set +5% # increase screen brightness
