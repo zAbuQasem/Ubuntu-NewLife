@@ -159,7 +159,7 @@ function PYCHARM() {
 	# Last function to call as it requires GUI interaction
 	echo -e "\n[*] Installing Pycharm" | tee -a errors.log
 	sudo snap install pycharm-community --classic
-}
+} && PYCHARM
 
 
 function PYTHONLIBS(){
