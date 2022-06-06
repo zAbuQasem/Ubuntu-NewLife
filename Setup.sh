@@ -24,13 +24,12 @@ echo yes | sudo add-apt-repository ppa:webupd8team/indicator-kedeconnect # KDE c
 echo yes | sudo add-apt-repository ppa:obsproject/obs-studio # OBS-Studio screen recorder
 
 
-sudo apt update -y 
+#sudo apt update -y 
 
 # Installing alot of things
-sudo apt install -y build-essential linux-headers-generic dirmngr gnupg apt-transport-https ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic audacity telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser wireshark zsh docker.io virtualbox virtualbox-ext-pack
+sudo apt install -y build-essential linux-headers-generic dirmngr gnupg apt-transport-https ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic audacity telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark
 
 # Adding current user to docker group
-sudo groupadd docker
 sudo usermod -a -G docker $USER
 
 # Installing ngrok
@@ -53,13 +52,6 @@ function SUBLIMETEXT4() {
 	sudo apt install -y sublime-text 
 } && SUBLIMETEXT4  
 
-function OHMYZSH() {
-	echo -e "\n[*] Installing OhMyZsh" | tee -a errors.log
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	wget https://raw.githubusercontent.com/zAbuQasem/Misc/main/zshrc
-	sed -i "s/<HOME>/$USER/g" "./zshrc"
-	mv zshrc ~/.zshrc
-} && OHMYZSH 
 
 function TMUX() {
 	echo -e "\n[*] Installing Tmux" | tee -a errors.log
@@ -83,7 +75,8 @@ function NVIM() {
 	wget https://github.com/zAbuQasem/Misc/raw/main/nvim.zip
 	# Just in case lol
 	mkdir ~/.config 2>/dev/null
-	/usr/bin/unzip nvim.zip –d ~/.config
+	7z x nvim.zip
+	cp -r nvim /home/$USER/.config
 	# "Plug" package manager
 	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
@@ -159,7 +152,7 @@ function PWNDBG() {
 function PYCHARM() {
 	# Last function to call as it requires GUI interaction
 	echo -e "\n[*] Installing Pycharm" | tee -a errors.log
-	curl -fsSL https://raw.githubusercontent.com/nagygergo/jetbrains-toolbox-install/master/jetbrains-toolbox.sh
+	curl -fsSL https://raw.githubusercontent.com/nagygergo/jetbrains-toolbox-install/master/jetbrains-toolbox.sh -o jetbrains-toolbox.sh
 	chmod +x jetbrains-toolbox.sh
 	sudo ./jetbrains-toolbox.sh
 }
@@ -186,10 +179,10 @@ RUN() {
 	PYCHARM
 	# Comment the below line to skip istalling more than 1000 mb of forensics tools
 	#FORENSICS
-	
 	# Cleanups
-	sudo apt-get clean	
+	sudo apt-get clean
 	sudo apt -y autoremove
 	echo "[+] Finished the setup process, Please view ./errors.log in case of corruption"
-	echo  -e "\033[5mPlease restart your computer!\033[0m"
+	echo  -e "\033[5m---> Please restart your computer!\033[0m"
 } && RUN
+
