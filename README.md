@@ -12,6 +12,7 @@ chmod +x Setup.sh
  ```
 echo -e "\n[*] Installing OhMyZsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+# Run below commands to install my zshrc file....
 wget https://raw.githubusercontent.com/zAbuQasem/Misc/main/zshrc
 sed -i "s/<HOME>/$USER/g" "./zshrc"
 mv zshrc ~/.zshrc
