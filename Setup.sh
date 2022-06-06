@@ -24,7 +24,7 @@ echo yes | sudo add-apt-repository ppa:webupd8team/indicator-kedeconnect # KDE c
 echo yes | sudo add-apt-repository ppa:obsproject/obs-studio # OBS-Studio screen recorder
 
 
-#sudo apt update -y 
+sudo apt update -y 
 
 # Installing alot of things
 sudo apt install -y build-essential linux-headers-generic dirmngr gnupg apt-transport-https gdebi-core ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic audacity telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate atom
