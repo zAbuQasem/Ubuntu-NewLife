@@ -32,6 +32,8 @@ sudo apt install -y build-essential linux-headers-generic dirmngr brightnessctl 
 # Adding current user to docker group
 sudo usermod -a -G docker $USER
 
+# Mandatory for i3 headache
+sudo chmod +s /usr/bin/brightnessctl
 
 # Toggle apps by clickig (tested o ubuntu)
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize' &>/dev/null
