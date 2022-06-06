@@ -22,7 +22,7 @@ echo yes | sudo add-apt-repository ppa:ubuntuhandbook1/audacity # audacity
 echo yes | sudo add-apt-repository ppa:eugenesan/ppa # caffeine
 echo yes | sudo add-apt-repository ppa:webupd8team/indicator-kedeconnect # KDE connect
 echo yes | sudo add-apt-repository ppa:obsproject/obs-studio # OBS-Studio screen recorder
-echo yes | sudo apt-add-repository "deb http://apt.kubernetes.io/kubernetes-xenial main"
+
 
 sudo apt update -y 
 
