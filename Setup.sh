@@ -93,8 +93,10 @@ function FORENSICS() {
 
 function OBSIDIAN() {
 	echo -e "\n[*] Installing Obsidian-notes" | tee -a errors.log
-	wget "https://github.com/obsidianmd/obsidian-releases/releases/download/v0.14.6/Obsidian-0.14.6.AppImage"
-	sudo mv "./Obsidian-0.14.6.AppImage" /usr/local/bin/obsidian
+	wget "https://github.com/obsidianmd/obsidian-releases/releases/download/v0.14.6/obsidian_0.14.6_amd64.deb"
+	chmod +x 'obsidian_0.14.6_amd64.deb'
+	sudo dpkg -i ./'obsidian_0.14.6_amd64.deb'
+
 } && OBSIDIAN 
 
 function NOTES() {
