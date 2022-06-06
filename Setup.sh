@@ -27,10 +27,11 @@ echo yes | sudo add-apt-repository ppa:obsproject/obs-studio # OBS-Studio screen
 #sudo apt update -y 
 
 # Installing alot of things
-sudo apt install -y build-essential linux-headers-generic dirmngr gnupg apt-transport-https ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic audacity telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate
+sudo apt install -y build-essential linux-headers-generic dirmngr gnupg apt-transport-https ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic audacity telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate atom
 
 # Adding current user to docker group
 sudo usermod -a -G docker $USER
+
 
 # Toggle apps by clickig (tested o ubuntu)
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize' &>/dev/null
@@ -83,8 +84,6 @@ function NVIM() {
 	# "Plug" package manager
 	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
 		https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-	# Installing plugins
-	nvim -c ':PlugInstall'
 	} && NVIM 
 
 function FORENSICS() {
@@ -175,7 +174,14 @@ function I3(){
 	$basedir/i3config.sh
 } && I3 
 
-
+function MSTEAMS() {
+	echo -e "\n[*] Installing Microsoft teams" | tee -a errors.log
+	# Ensuring sudo pass again...
+	sudo ls
+	curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+	sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
+	sudo apt update -y && sudo apt install -y teams
+} && MSTEAMS
 
 RUN() {
 	# Later going to invoke functions and redirect errors to a file to reinstall manually or fix the script
@@ -190,4 +196,5 @@ RUN() {
 	echo "[+] Finished the setup process, Please view ./errors.log in case of corruption"
 	echo  -e "\033[5m---> Please restart your computer!\033[0m"
 } && RUN
-
+# TODO
+# Install the apps that require appending a source file from snap if they are available
