@@ -170,3 +170,22 @@ exec_always --no-startup-id "setxkbmap -layout us,ar"
 # Brightness control
 bindsym XF86MonBrightnessUp exec brightnessctl set +5% # increase screen brightness
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%- # decrease screen brightness
+
+
+# shutdown / restart / suspend...  (Press $mod+backspace)
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (CTRL+s) shutdown
+
+mode "$mode_system" {
+    bindsym l exec --no-startup-id $i3lockwall, mode "default"
+    bindsym e exec --no-startup-id i3-msg exit, mode "default"
+    bindsym s exec --no-startup-id $i3lockwall && systemctl suspend, mode "default"
+    bindsym h exec --no-startup-id $i3lockwall && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Ctrl+s exec --no-startup-id systemctl poweroff -i, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+BackSpace mode "$mode_system"
