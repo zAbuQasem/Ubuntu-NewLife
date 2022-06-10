@@ -17,17 +17,16 @@ sudo apt update -y && sudo apt upgrade -y
 # Adding repositories
 echo yes | sudo add-apt-repository ppa:gerardpuig/ppa # ubuntu-cleaner
 echo yes | sudo add-apt-repository ppa:videolan/master-daily # VLC
-echo yes | sudo add-apt-repository ppa:webupd8team/atom # atom
-echo yes | sudo add-apt-repository ppa:ubuntuhandbook1/audacity # audacity
 echo yes | sudo add-apt-repository ppa:eugenesan/ppa # caffeine
 echo yes | sudo add-apt-repository ppa:webupd8team/indicator-kedeconnect # KDE connect
 echo yes | sudo add-apt-repository ppa:obsproject/obs-studio # OBS-Studio screen recorder
+echo yes | sudo add-apt-repository ppa:atareao/atareao # xkb-switch 
 
 
 sudo apt update -y 
 
 # Installing alot of things
-sudo apt install -y build-essential linux-headers-generic dirmngr brightnessctl gnupg apt-transport-https gdebi-core ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic audacity telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate atom
+sudo apt install -y build-essential linux-headers-generic dirmngr brightnessctl xkb-switch gnupg apt-transport-https gdebi-core ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic  telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate 
 
 # Adding current user to docker group
 sudo usermod -a -G docker $USER
@@ -38,8 +37,12 @@ sudo chmod +s /usr/bin/brightnessctl
 # Toggle apps by clickig (tested o ubuntu)
 gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize' &>/dev/null
 
-# Installing ngrok
+# Installing ngrok , audacity , atom
+echo -e "\n[*]Installing ngrok , audacity , atom " | tee -a errors.log
 sudo snap install ngrok
+sudo snap install audacity
+sudo snap install atom --classic
+
 
 # Installing vmware latest version
 function VMWARE() {
