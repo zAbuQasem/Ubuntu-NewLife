@@ -26,7 +26,7 @@ echo yes | sudo add-apt-repository ppa:atareao/atareao # xkb-switch
 sudo apt update -y 
 
 # Installing alot of things
-sudo apt install -y build-essential linux-headers-generic dirmngr brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic  telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate 
+sudo apt install -y build-essential linux-headers-generic dirmngr numlockx brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic  telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate 
 
 # Adding current user to docker group
 sudo usermod -a -G docker $USER
