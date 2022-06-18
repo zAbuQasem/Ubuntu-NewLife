@@ -125,7 +125,7 @@ function K8S(){
 function DISCORD() {
 	echo -e "\n[*] Installing Discord" | tee -a errors.log
 	wget "https://discord.com/api/download?platform=linux&format=deb" -O discord.deb
-	sudo apt install -y $workingdir/discord.deb
+	sudo dpkg -i $workingdir/discord.deb
 } && DISCORD 
 
 function AWSCLI() {
