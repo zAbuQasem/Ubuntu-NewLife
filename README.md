@@ -9,6 +9,7 @@ chmod +x Setup.sh
 ./Setup.sh
 ```
 ## OHMYZSH installation
+ Enusre that zsh is already installed! (`sudo apt install -y zsh`)
  ```bash
 echo -e "\n[*] Installing OhMyZsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
