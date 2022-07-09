@@ -192,3 +192,6 @@ bindsym $mod+BackSpace mode "$mode_system"
 
 # Enable NumLock on startup
 exec_always --no-startup-id numlockx on
+
+# Vmware ClipBoard fix (Uncomment when using vm)
+#exec_always --no-startup-id vmware-user
