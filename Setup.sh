@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xe
 
 # Variables
 basedir=$(pwd)
@@ -83,7 +83,7 @@ function NVIM() {
 	# Installing Neovim
 	wget https://github.com/neovim/neovim/releases/download/v0.7.2/nvim-linux64.deb
 	sudo dpkg -i ./nvim-linux64.deb
-	# Installing conimg file
+	# Installing config file
 	
 	git clone https://github.com/LunarVim/nvim-basic-ide.git ~/.config/nvim
 	# Just in case lol
