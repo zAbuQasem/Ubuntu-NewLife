@@ -168,13 +168,6 @@ function PYTHONLIBS(){
 	pip3 install --no-warn-script-location  updog trufflehog rich flask-unsign flask paramiko pyngrok pwntools z3-solver
 } && PYTHONLIBS
 
-
-function I3(){
-	echo -e "\n[*] Installing i3 desktop" | tee -a errors.log
-	chmod +x "$basedir/i3config.sh"
-	$basedir/i3config.sh
-} && I3 
-
 function MSTEAMS() {
 	echo -e "\n[*] Installing Microsoft teams" | tee -a errors.log
 	# Ensuring sudo pass again...
@@ -194,6 +187,13 @@ function sliverc2(){
 	echo -e "\n[*] Installing Github desktop" | tee -a errors.log
 	curl https://sliver.sh/install|sudo bash
 } && sliverc2
+
+function I3(){
+	echo -e "\n[*] Installing i3 desktop" | tee -a errors.log
+	cd $basedir
+	chmod +x "./i3config.sh"
+	./i3config.sh
+} && I3 
 
 RUN() {
 	# Later going to invoke functions and redirect errors to a file to reinstall manually or fix the script
