@@ -26,7 +26,7 @@ echo yes | sudo add-apt-repository ppa:atareao/atareao # xkb-switch
 sudo apt update -y 
 
 # Installing alot of things
-sudo apt install -y build-essential linux-headers-generic dirmngr numlockx brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic  telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate 
+sudo apt install -y build-essential software-properties-common linux-headers-generic dirmngr numlockx brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic  telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate 
 
 # Adding current user to docker group
 sudo usermod -a -G docker $USER
@@ -139,28 +139,20 @@ function AWSCLI() {
 
 function GHIDRA() {
 	echo -e "\n[*] Installing Ghidra_10.1.3" | tee -a errors.log
-	wget "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.1.3_build/ghidra_10.1.3_PUBLIC_20220421.zip"
-	unzip ghidra_10.1.3_PUBLIC_20220421.zip && mv ghidra_10.1.3_PUBLIC_20220421 ghidra && cp -r ghidra /usr/share
+	wget "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.2.2_build/ghidra_10.2.2_PUBLIC_20221115.zip"
+	unzip ghidra_10.2.2_PUBLIC_20221115.zip -d /usr/share/ghidra
 	wget "https://raw.githubusercontent.com/Crypto-Cat/CTF/main/auto_ghidra.py"
 	chmod +x auto_ghidra.py
 	sed -i '1s/^/#!\/usr\/bin\/env python3 \n/' auto_ghidra.py
 	sudo mv auto_ghidra.py /usr/bin/auto_ghidra
 } && GHIDRA 
 
-function PWNDBG() {
-	echo -e "\n[*] Installing Pwndbg" | tee -a errors.log
-	git clone https://github.com/pwndbg/pwndbg
-	cd pwndbg
-	./setup.sh
-	cd ..
-	mv pwndbg ~/pwndbg-src
-	echo "source ~/pwndbg-src/gdbinit.py" > ~/.gdbinit_pwndbg
-	echo -e "define init-pwndbg\nsource ~/.gdbinit_pwndbg\nend\ndocument init-pwndbg\nInitializes PwnDBG\nend" > ~/.gdbinit
-	echo "#!/bin/bash" > pwndbg ; echo -e 'exec gdb -q -ex init-pwndbg "$@"' >> pwndbg ; chmod +x pwndbg
-	sudo mv pwndbg /usr/bin
-	# Returning to the working directory
+function debuggers() {
+	cd ~ && git clone https://github.com/apogiatzis/gdb-peda-pwndbg-gef.git
+	cd ~/gdb-peda-pwndbg-gef
+	./install.sh
 	cd $workingdir
-} && PWNDBG 
+} && debuggers
 
 function PYCHARM() {
 	# Last function to call as it requires GUI interaction
