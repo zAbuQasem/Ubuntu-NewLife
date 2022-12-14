@@ -26,7 +26,7 @@ echo yes | sudo add-apt-repository ppa:atareao/atareao # xkb-switch
 sudo apt update -y 
 
 # Installing alot of things
-sudo apt install -y build-essential software-properties-common linux-headers-generic dirmngr numlockx brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic  telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate 
+sudo apt install -y build-essential snapd software-properties-common linux-headers-generic dirmngr numlockx brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi snapd openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick gimp vlc qtwayland5 synaptic  telegram-desktop caffeine  atril kdeconnect  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate 
 
 # Adding current user to docker group
 sudo usermod -a -G docker $USER
@@ -39,6 +39,8 @@ gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize' &>
 
 # Installing ngrok , audacity , atom
 echo -e "\n[*]Installing ngrok , audacity , atom " | tee -a errors.log
+sudo service snapd restart
+sudo systemctl enable snapd
 sudo snap install ngrok
 sudo snap install audacity
 sudo snap install atom --classic
@@ -163,7 +165,7 @@ function PYCHARM() {
 
 function PYTHONLIBS(){
 	echo -e "\n[*] Installing Python3 packages" | tee -a errors.log
-	pip3 install --no-warn-script-location  updog trufflehog rich flask-unsign flask paramiko pyngrok
+	pip3 install --no-warn-script-location  updog trufflehog rich flask-unsign flask paramiko pyngrok pwntools z3-solver
 } && PYTHONLIBS
 
 
@@ -187,6 +189,11 @@ function GITHUBDESKTOP(){
 	wget https://github.com/shiftkey/desktop/releases/download/release-2.9.3-linux3/GitHubDesktop-linux-2.9.3-linux3.deb
 	echo y | sudo gdebi GitHubDesktop-linux-2.9.3-linux3.deb
 } && GITHUBDESKTOP
+
+function sliverc2(){
+	echo -e "\n[*] Installing Github desktop" | tee -a errors.log
+	curl https://sliver.sh/install|sudo bash
+} && sliverc2
 
 RUN() {
 	# Later going to invoke functions and redirect errors to a file to reinstall manually or fix the script
