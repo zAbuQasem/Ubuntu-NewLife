@@ -33,6 +33,7 @@ cd impacket
 pipx install .
 # Scripts will be available without "impacket" prefix
 ```
+
 ## Change lockscreen image
 ```bash
 sudo apt install libglib2.0-dev-bin -y
@@ -47,3 +48,4 @@ chmod +x fix-vmware.sh
 ```
 # Useful Scripts:
 - [Weaponize Kali](https://github.com/snovvcrash/WeaponizeKali.sh)
+- [Install Volatility](https://pwnsec-notes.gitbook.io/ctf-notes/forensics/memory#installing-volatility)
