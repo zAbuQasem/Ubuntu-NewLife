@@ -46,4 +46,4 @@ chmod +x fix-vmware.sh
 ./fix-vmware.sh
 ```
 # Useful Scripts:
-- ![Weaponize Kali](https://github.com/snovvcrash/WeaponizeKali.sh)
+- [Weaponize Kali](https://github.com/snovvcrash/WeaponizeKali.sh)
