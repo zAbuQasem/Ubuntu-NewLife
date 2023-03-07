@@ -41,7 +41,7 @@ cp .config/i3/clipboard_fix.sh ~/.config/i3/clipboard_fix.sh
 cp .config/i3/battery-plus ~/.config/i3/battery-plus
 chmod +x ~/.config/i3/battery-plus
 cat ~/i3-volume/i3volume-pulseaudio.conf >> ~/.config/i3/config
-cp -r .wallpaper ~/.wallpaper 
+cp -r wallpaper ~/.wallpaper 
 
 echo "After reboot: Select i3 on login, run lxappearance and select arc-dark"
 
