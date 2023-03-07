@@ -13,10 +13,25 @@ chmod +x Setup.sh
  ```bash
 echo -e "\n[*] Installing OhMyZsh"
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 # Run below commands to install my zshrc file....
 wget https://raw.githubusercontent.com/zAbuQasem/Misc/main/zshrc
 sed -i "s/<HOME>/$USER/g" "./zshrc"
 mv zshrc ~/.zshrc
+```
+# Extras
+```sh
+# Install fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --all
+# Install arsenal
+python3 -m pip install arsenal-cli
+# Install latest impacket-tools
+git clone https://github.com/fortra/impacket
+cd impacket 
+pipx install .
+# Scripts will be available without "impacket" prefix
 ```
 ## Change lockscreen image
 ```bash
