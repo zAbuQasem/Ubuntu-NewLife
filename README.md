@@ -52,6 +52,11 @@ pipx install -f "git+https://github.com/garrettfoster13/pre2k.git"
 pipx install -f "git+https://github.com/skelsec/pypykatz.git"
 pipx install -f "git+https://github.com/Tw1sm/RITM.git"
 pipx install -f "git+https://github.com/sc0tfree/updog.git"
+
+# Install vulscan nmap scripts
+#https://github.com/scipag/vulscan
+git clone https://github.com/scipag/vulscan scipag_vulscan
+ln -s `pwd`/scipag_vulscan /usr/share/nmap/scripts/vulscan    
 ```
 
 ## Change lockscreen image
