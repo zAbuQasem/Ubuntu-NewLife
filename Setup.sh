@@ -22,7 +22,7 @@ echo yes | sudo add-apt-repository ppa:ondrej/php
 sudo apt update -y 
 
 # Installing alot of things
-sudo apt install -y nautilus build-essential snapd software-properties-common linux-headers-generic jq dirmngr numlockx brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi  openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate xsel wl-clipboard ripgrep npm php fd-find
+sudo apt install -y nautilus build-essential snapd software-properties-common linux-headers-generic jq dirmngr numlockx brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi  openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate xsel wl-clipboard ripgrep npm php fd-find bat
 
 # Installing node
 sudo npm install -g n
@@ -62,7 +62,7 @@ function SUBLIMETEXT4() {
 	echo yes | sudo add-apt-repository "deb https://download.sublimetext.com/ apt/stable/"
 	sudo apt update -y
 	sudo apt install -y sublime-text 
-} #&& SUBLIMETEXT4  
+} && SUBLIMETEXT4  
 
 
 function TMUX() {
