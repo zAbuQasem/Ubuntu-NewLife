@@ -21,18 +21,15 @@ mv zshrc ~/.zshrc
 ```
 # Extras
 ```sh
-# Install fzf
-git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
-~/.fzf/install --all
-# Install arsenal
-python3 -m pip install arsenal-cli
 # Install latest impacket-tools
 git clone https://github.com/fortra/impacket
 cd impacket 
 pipx install .
 # Scripts will be available without "impacket" prefix
+
 # Feroxbuster
 curl -sL https://raw.githubusercontent.com/epi052/feroxbuster/master/install-nix.sh | bash
+
 # FFUF
 go install github.com/ffuf/ffuf/v2@latest
 
