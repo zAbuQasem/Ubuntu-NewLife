@@ -29,6 +29,10 @@ sudo npm install -g n
 sudo n stable
 sudo npm i -g neovim
 
+# Install fzf
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --all
+
 # Adding current user to docker group
 sudo usermod -a -G docker $USER
 
