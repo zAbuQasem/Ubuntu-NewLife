@@ -58,13 +58,17 @@ pipx install -f "git+https://github.com/sc0tfree/updog.git"
 ```bash
 sudo apt install libglib2.0-dev-bin -y
 wget -qO - https://github.com/PRATAP-KUMAR/ubuntu-gdm-set-background/archive/main.tar.gz | tar zx --strip-components=1 ubuntu-gdm-set-background-main/ubuntu-gdm-set-background
-# To change the image
+## To change the image
 sudo ./ubuntu-gdm-set-background --image /PATH
 ```
 ## Fix Vmware issues with ubuntu 22.04
 ```bash
 chmod +x fix-vmware.sh
 ./fix-vmware.sh
+```
+## Prevent Auto Kernel upgrade
+```bash
+sudo apt-mark hold linux-image-$(uname -r)
 ```
 # Useful Scripts:
 - [Weaponize Kali](https://github.com/snovvcrash/WeaponizeKali.sh)
