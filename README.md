@@ -1,6 +1,5 @@
-# Ubuntu-NewLife
-I'm writing this script because i hate re-installing everything manually and customizing the **** every time whenever i have to re-install ubuntu.
-
+# Compability
+Tested on Ubuntu:20.04->22.04, blackbuntu:22.04, kali-linux
 # Usage
 ```bash
 git clone https://github.com/zAbuQasem/Ubuntu-NewLife.git
@@ -32,6 +31,10 @@ git clone https://github.com/fortra/impacket
 cd impacket 
 pipx install .
 # Scripts will be available without "impacket" prefix
+# Feroxbuster
+curl -sL https://raw.githubusercontent.com/epi052/feroxbuster/master/install-nix.sh | bash
+# FFUF
+go install github.com/ffuf/ffuf/v2@latest
 ```
 
 ## Change lockscreen image
