@@ -138,9 +138,9 @@ function AWSCLI() {
 } && AWSCLI 
 
 function GHIDRA() {
-	echo -e "\n[*] Installing Ghidra_10.1.3"
-	wget "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.2.2_build/ghidra_10.2.2_PUBLIC_20221115.zip"
-	sudo unzip ghidra_10.2.2_PUBLIC_20221115.zip -d /usr/share/ghidra
+	echo -e "\n[*] Installing Ghidra_10.2.3"
+	wget "https://github.com/NationalSecurityAgency/ghidra/releases/download/Ghidra_10.2.3_build/ghidra_10.2.3_PUBLIC_20230208.zip"
+	sudo unzip ghidra_10.2.3_PUBLIC_20230208.zip -d /usr/share/ghidra
 	wget "https://raw.githubusercontent.com/Crypto-Cat/CTF/main/auto_ghidra.py"
 	chmod +x auto_ghidra.py
 	sed -i '1s/^/#!\/usr\/bin\/env python3 \n/' auto_ghidra.py
@@ -163,7 +163,7 @@ function PYCHARM() {
 
 function PYTHONLIBS(){
 	echo -e "\n[*] Installing Python3 packages"
-	pip3 install --no-warn-script-location  updog trufflehog rich flask-unsign flask paramiko pyngrok pwntools z3-solver pwncat-cs pynvim git-dumper
+	pip3 install --no-warn-script-location updog trufflehog rich flask-unsign flask paramiko pyngrok pwntools z3-solver pwncat-cs pynvim git-dumper arsenal-cli
 } && PYTHONLIBS
 
 function MSTEAMS() {
