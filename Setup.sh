@@ -16,12 +16,18 @@ sudo apt update -y && sudo apt upgrade -y
 
 # Adding repositories
 echo yes | sudo add-apt-repository ppa:atareao/atareao # xkb-switch 
+echo yes | sudo add-apt-repository ppa:ondrej/php
 
 
 sudo apt update -y 
 
 # Installing alot of things
-sudo apt install -y nautilus build-essential snapd software-properties-common linux-headers-generic jq dirmngr numlockx brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates software-properties-common vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi  openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate
+sudo apt install -y nautilus build-essential snapd software-properties-common linux-headers-generic jq dirmngr numlockx brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi  openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark golang-go plocate xsel wl-clipboard ripgrep npm php fd-find
+
+# Installing node
+sudo npm install -g n
+sudo n stable
+sudo npm i -g neovim
 
 # Adding current user to docker group
 sudo usermod -a -G docker $USER
@@ -158,8 +164,8 @@ function PYCHARM() {
 
 function PYTHONLIBS(){
 	echo -e "\n[*] Installing Python3 packages"
-	pip3 install --no-warn-script-location  updog trufflehog rich flask-unsign flask paramiko pyngrok pwntools z3-solver gitdumper pwncat-cs
-} #&& PYTHONLIBS
+	pip3 install --no-warn-script-location  updog trufflehog rich flask-unsign flask paramiko pyngrok pwntools z3-solver pwncat-cs pynvim git-dumper
+} && PYTHONLIBS
 
 function MSTEAMS() {
 	echo -e "\n[*] Installing Microsoft teams"
