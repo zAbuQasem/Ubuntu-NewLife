@@ -84,10 +84,9 @@ function VSCODE() {
 function NVIM() {
 	echo -e "\n[*] Installing NeoVim"
 	# Installing Neovim
-	wget https://github.com/neovim/neovim/releases/download/v0.7.2/nvim-linux64.deb
+	wget https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.deb
 	sudo dpkg -i ./nvim-linux64.deb
 	# Installing config file
-	
 	git clone https://github.com/LunarVim/nvim-basic-ide.git ~/.config/nvim
 	# "Plug" package manager
 	sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
