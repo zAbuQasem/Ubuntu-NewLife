@@ -35,6 +35,32 @@ pipx install .
 curl -sL https://raw.githubusercontent.com/epi052/feroxbuster/master/install-nix.sh | bash
 # FFUF
 go install github.com/ffuf/ffuf/v2@latest
+
+# AD tools
+pipx install -f "git+https://github.com/fox-it/BloodHound.py.git"
+pipx install -f "git+https://github.com/ly4k/Certipy.git"
+pipx install -f "git+https://github.com/p0dalirius/Coercer.git"
+pipx install -f "git+https://github.com/Porchetta-Industries/CrackMapExec.git"
+pipx install -f "git+https://github.com/snovvcrash/DivideAndScan.git"
+pipx install man-spider
+pipx install -f "git+https://github.com/Z4kSec/Masky"
+pipx install -f "git+https://github.com/Hackndo/WebclientServiceScanner.git"
+pipx install -f "git+https://github.com/fox-it/aclpwn.py.git"
+pipx install -f "git+https://github.com/dirkjanm/adidnsdump.git"
+pipx install -f "git+https://github.com/fox-it/bloodhound-import.git"
+pipx install -f "git+https://github.com/zer1t0/certi.git"
+pipx install -f "git+https://github.com/zblurx/certsync.git"
+pipx install -f "git+https://github.com/galkan/crowbar.git"
+pipx install -f "git+https://github.com/zblurx/dploot.git"
+pipx install -f "git+https://github.com/cddmp/enum4linux-ng.git"
+pipx install -f "git+https://github.com/fortra/impacket.git"
+pipx install -f "git+https://github.com/franc-pentest/ldeep.git"
+pipx install -f "git+https://github.com/Hackndo/lsassy.git"
+pipx install -f "git+https://github.com/fox-it/mitm6.git"
+pipx install -f "git+https://github.com/garrettfoster13/pre2k.git"
+pipx install -f "git+https://github.com/skelsec/pypykatz.git"
+pipx install -f "git+https://github.com/Tw1sm/RITM.git"
+pipx install -f "git+https://github.com/sc0tfree/updog.git"
 ```
 
 ## Change lockscreen image
