@@ -13,6 +13,7 @@ cd $workingdir
 
 # Basic updates
 sudo apt update -y && sudo apt upgrade -y
+sudo apt install software-properties-common
 
 # Adding repositories
 echo yes | sudo add-apt-repository ppa:atareao/atareao # xkb-switch 
