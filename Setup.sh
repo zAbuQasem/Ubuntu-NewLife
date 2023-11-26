@@ -52,8 +52,8 @@ sudo snap install audacity
 #sudo snap install atom --classic
 
 # Install golang
-wget https://go.dev/dl/go1.20.2.linux-amd64.tar.gz
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.20.2.linux-amd64.tar.gz
+wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.21.1.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 
 # Installing vmware latest version
@@ -93,7 +93,7 @@ function VSCODE() {
 function NVIM() {
 	echo -e "\n[*] Installing NeoVim"
 	# Installing Neovim
-	wget https://github.com/neovim/neovim/releases/download/v0.8.0/nvim-linux64.deb
+	wget https://github.com/neovim/neovim/releases/download/v0.9.1/nvim-linux64.deb
 	sudo dpkg -i ./nvim-linux64.deb
 	# Installing config file
 	git clone https://github.com/LunarVim/nvim-basic-ide.git ~/.config/nvim
