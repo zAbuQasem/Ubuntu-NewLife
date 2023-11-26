@@ -93,8 +93,8 @@ function VSCODE() {
 function NVIM() {
 	echo -e "\n[*] Installing NeoVim"
 	# Installing Neovim
-	wget https://github.com/neovim/neovim/releases/download/v0.9.1/nvim-linux64.deb
-	sudo dpkg -i ./nvim-linux64.deb
+	wget https://github.com/neovim/neovim/releases/download/v0.9.1/nvim.appimage
+	chmod u+x nvim.appimage && sudo mv nvim.appimage /usr/bin
 	# Installing config file
 	git clone https://github.com/LunarVim/nvim-basic-ide.git ~/.config/nvim
 	# "Plug" package manager
