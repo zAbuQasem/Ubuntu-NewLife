@@ -23,12 +23,17 @@ echo yes | sudo add-apt-repository ppa:ondrej/php
 sudo apt update -y 
 
 # Installing alot of things
-sudo apt install -y nautilus build-essential snapd software-properties-common linux-headers-generic jq dirmngr numlockx brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi  openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick  qtqr obs-studio flameshot chromium-browser zsh docker.io wireshark plocate xsel wl-clipboard ripgrep npm php fd-find bat smbclient
+sudo apt install -y nautilus build-essential snapd software-properties-common linux-headers-generic jq dirmngr numlockx brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi  openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick  qtqr obs-studio flameshot chromium-browser zsh wireshark plocate xsel wl-clipboard ripgrep npm php fd-find bat smbclient nginx ipython3
+
+# Install Docker
+curl https://get.docker.com/  | sudo bash
+
+# Install rust
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | bash
 
 # Installing node
 sudo npm install -g n
 sudo n stable
-sudo npm i -g neovim
 
 # Install fzf
 git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
@@ -48,7 +53,7 @@ echo -e "\n[*]Installing ngrok , audacity , atom "
 sudo service snapd restart
 sudo systemctl enable snapd
 sudo snap install ngrok
-sudo snap install audacity
+#sudo snap install audacity
 #sudo snap install atom --classic
 
 # Install golang
@@ -94,7 +99,7 @@ function NVIM() {
 	echo -e "\n[*] Installing NeoVim"
 	# Installing Neovim
 	wget https://github.com/neovim/neovim/releases/download/v0.9.1/nvim.appimage
-	chmod u+x nvim.appimage && sudo mv nvim.appimage /usr/bin
+	chmod u+x nvim.appimage && sudo mv nvim.appimage /usr/bin/nvim
 	# Installing config file
 	git clone https://github.com/LunarVim/nvim-basic-ide.git ~/.config/nvim
 	# "Plug" package manager
@@ -137,7 +142,7 @@ function DISCORD() {
 	echo -e "\n[*] Installing Discord"
 	wget "https://discord.com/api/download?platform=linux&format=deb" -O discord.deb
 	sudo dpkg -i $workingdir/discord.deb
-} #&& DISCORD 
+} && DISCORD 
 
 function AWSCLI() {
 	echo -e "\n[*] Installing AWS-CLI"
@@ -154,14 +159,14 @@ function GHIDRA() {
 	chmod +x auto_ghidra.py
 	sed -i '1s/^/#!\/usr\/bin\/env python3 \n/' auto_ghidra.py
 	sudo mv auto_ghidra.py /usr/bin/auto_ghidra
-} && GHIDRA 
+} #&& GHIDRA 
 
 function debuggers() {
 	cd ~ && git clone https://github.com/apogiatzis/gdb-peda-pwndbg-gef.git
 	cd ~/gdb-peda-pwndbg-gef
 	./install.sh
 	cd $workingdir
-} && debuggers
+} #&& debuggers
 
 function PYCHARM() {
 	# Last function to call as it requires GUI interaction
@@ -182,20 +187,20 @@ function MSTEAMS() {
 	curl https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
 	sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/ms-teams stable main" > /etc/apt/sources.list.d/teams.list'
 	sudo apt update -y && sudo apt install -y teams
-} #&& MSTEAMS
+} && MSTEAMS
 
 function GITHUBDESKTOP(){
 	echo -e "\n[*] Installing Github desktop"
-	wget https://github.com/shiftkey/desktop/releases/download/release-2.9.3-linux3/GitHubDesktop-linux-2.9.3-linux3.deb
-	echo y | sudo gdebi GitHubDesktop-linux-2.9.3-linux3.deb
-} #&& GITHUBDESKTOP
+	wget https://github.com/shiftkey/desktop/releases/download/release-3.3.6-linux3/GitHubDesktop-linux-amd64-3.3.6-linux3.deb 
+	echo y | sudo gdebi GitHubDesktop-linux-amd64-3.3.6-linux3.deb
+} && GITHUBDESKTOP
 
 function I3(){
 	echo -e "\n[*] Installing i3 desktop"
 	cd $basedir
 	chmod +x "./i3config.sh"
 	./i3config.sh
-} && I3 
+} #&& I3 
 
 
 RUN() {

@@ -79,3 +79,5 @@ sudo apt-mark hold linux-image-$(uname -r)
 - [Weaponize Kali](https://github.com/snovvcrash/WeaponizeKali.sh)
 - [Install Volatility](https://pwnsec-notes.gitbook.io/ctf-notes/forensics/memory#installing-volatility)
 - [f8x](https://github.com/ffffffff0x/f8x)
+# TODO 
+Convert this to ansible
