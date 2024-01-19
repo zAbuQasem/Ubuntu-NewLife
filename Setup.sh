@@ -61,6 +61,9 @@ wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz
 sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.21.1.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 
+# Installing Kubecolor
+go install github.com/hidetatz/kubecolor/cmd/kubecolor@latest
+
 # Installing vmware latest version
 function VMWARE() {
 	echo -e "\n[*]Installing VmWare"
