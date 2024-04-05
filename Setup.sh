@@ -23,7 +23,7 @@ echo yes | sudo add-apt-repository ppa:ondrej/php
 sudo apt update -y 
 
 # Installing alot of things
-sudo apt install -y nautilus build-essential snapd software-properties-common linux-headers-generic jq dirmngr numlockx brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi  openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick  qtqr obs-studio flameshot chromium-browser zsh wireshark plocate xsel wl-clipboard ripgrep npm php fd-find bat smbclient nginx ipython3
+sudo apt install -y nautilus python3-launchpadlib build-essential snapd software-properties-common linux-headers-generic jq dirmngr numlockx brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates vim git curl wget  python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools gdebi  openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace imagemagick  qtqr obs-studio flameshot chromium-browser zsh wireshark plocate xsel wl-clipboard ripgrep npm php fd-find bat smbclient nginx ipython3
 
 # Install Docker
 curl https://get.docker.com/  | sudo bash
@@ -57,8 +57,8 @@ sudo snap install ngrok
 #sudo snap install atom --classic
 
 # Install golang
-wget https://go.dev/dl/go1.21.1.linux-amd64.tar.gz
-sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.21.1.linux-amd64.tar.gz
+wget https://go.dev/dl/go1.22.2.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go && sudo tar -C /usr/local -xzf go1.22.2.linux-amd64.tar.gz
 export PATH=$PATH:/usr/local/go/bin
 
 # Installing Kubecolor
