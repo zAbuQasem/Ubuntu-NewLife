@@ -168,8 +168,8 @@ function install_devops_tools() {
 # Final Cleanup and Reboot Prompt
 function final_cleanup() {
   echo -e "${CYAN}\n[*] Final Cleanup...${NC}"
-  apt-get update --fix-missing
-  apt upgrade -y
+  sudo apt-get update --fix-missing
+  sudo apt upgrade -y
   sudo apt clean 2>&1 | tee -a "${errorlog}" || true
   sudo apt autoremove -y 2>&1 | tee -a "${errorlog}" || true
   rm -rf "${workingdir}"
