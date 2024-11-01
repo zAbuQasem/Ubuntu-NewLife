@@ -32,7 +32,7 @@ sudo apt install -y software-properties-common curl wget unzip 2>&1 | tee -a "${
 # Install Core Utilities
 function install_core() {
   echo -e "${CYAN}\n[*] Installing Core Utilities...${NC}"
-  sudo apt install -y nautilus python3-launchpadlib build-essential fzf zsh snapd linux-headers-generic jq \
+  sudo apt install -y nautilus python3-launchpadlib build-essential zsh snapd linux-headers-generic jq \
     dirmngr numlockx exiftool gnupg apt-transport-https gdebi-core ca-certificates \
     vim python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools \
     gdebi openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace obs-studio flameshot \
