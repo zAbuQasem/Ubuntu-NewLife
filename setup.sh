@@ -36,7 +36,7 @@ function install_core() {
     dirmngr numlockx exiftool gnupg apt-transport-https gdebi-core ca-certificates \
     vim python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools \
     gdebi openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace obs-studio flameshot \
-    zsh wireshark plocate xsel xclip wl-clipboard ripgrep npm fd-find bat smbclient nginx ipython3 most stacer 2>&1 | tee -a "${errorlog}"
+    zsh wireshark plocate xsel xclip wl-clipboard ripgrep npm fd-find bat smbclient nginx ipython3 most stacer gnome-tweaks nmap 2>&1 | tee -a "${errorlog}"
 }
 
 # Install Missing Libraries and Utilities
@@ -163,6 +163,35 @@ function install_devops_tools() {
   curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
   chmod +x kubectl
   sudo mv kubectl /usr/local/bin
+
+  # Install act
+  wget https://raw.githubusercontent.com/nektos/act/master/install.sh
+  sudo bash install.sh -b /usr/local/bin
+
+  # Install Packer & Terraform
+  curl -fsSL https://apt.releases.hashicorp.com/gpg | sudo apt-key add -
+  echo 'y' | sudo apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+  sudo apt-get update
+  sudo apt-get install -y packer terraform
+}
+
+function install_discord() {
+  echo -e "${CYAN}\n[*] Installing Discord...${NC}"
+  curl -L 'https://discord.com/api/download?platform=linux&format=deb' -o discord.deb
+  sudo dpkg -i ./discord.deb
+  rm discord.deb
+  git clone https://github.com/BetterDiscord/BetterDiscord.git && cd BetterDiscord
+  sudo npm install -g pnpm
+  pnpm install
+  pnpm inject
+  cd .. && rm -rf BetterDiscord
+}
+
+function install_slack() {
+  echo -e "${CYAN}\n[*] Installing Discord...${NC}"
+  curl  https://downloads.slack-edge.com/desktop-releases/linux/x64/4.41.96/slack-desktop-4.41.96-amd64.deb -o slack.deb
+  sudo dpkg -i ./slack.deb
+  rm slack.deb
 }
 
 # Final Cleanup and Reboot Prompt
@@ -176,6 +205,8 @@ function final_cleanup() {
   echo -e "${GREEN}[+] Finished the setup process. Please check ${errorlog} in case of any errors.${NC}"
   echo -e "${YELLOW}---> Please restart your computer!${NC}"
 }
+
+
 
 # Main function to call all installation functions
 function main() {
@@ -194,6 +225,8 @@ function main() {
   install_vscode
   install_nvim
   install_devops_tools
+  install_discord
+  install_slack
   final_cleanup
 }
 

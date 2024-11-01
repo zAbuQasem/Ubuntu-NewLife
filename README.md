@@ -1,11 +1,10 @@
 # Compability
 Tested on Ubuntu:20.04->22.04, blackbuntu:22.04
-# Usage
+## Usage
 ```bash
 git clone https://github.com/zAbuQasem/Ubuntu-NewLife.git
 cd Ubuntu-NewLife
-chmod +x setup.sh
-./Setup.sh
+./setup.sh
 ```
 ## OHMYZSH installation
  ```bash
