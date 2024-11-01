@@ -1,16 +1,16 @@
 # Compability
-Tested on Ubuntu:20.04->22.04, blackbuntu:22.04, kali-linux
+Tested on Ubuntu:20.04->22.04, blackbuntu:22.04
 # Usage
 ```bash
 git clone https://github.com/zAbuQasem/Ubuntu-NewLife.git
 cd Ubuntu-NewLife
-chmod +x Setup.sh
+chmod +x setup.sh
 ./Setup.sh
 ```
 ## OHMYZSH installation
- Enusre that zsh is already installed! (`sudo apt install -y zsh`)
  ```bash
 echo -e "\n[*] Installing OhMyZsh"
+sudo apt install zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
@@ -19,7 +19,7 @@ wget https://raw.githubusercontent.com/zAbuQasem/Misc/main/zshrc
 sed -i "s/<HOME>/$USER/g" "./zshrc"
 mv zshrc ~/.zshrc
 ```
-# Extras
+## Extras
 ```sh
 # Feroxbuster
 curl -sL https://raw.githubusercontent.com/epi052/feroxbuster/master/install-nix.sh | bash
@@ -79,5 +79,3 @@ sudo apt-mark hold linux-image-$(uname -r)
 - [Weaponize Kali](https://github.com/snovvcrash/WeaponizeKali.sh)
 - [Install Volatility](https://pwnsec-notes.gitbook.io/ctf-notes/forensics/memory#installing-volatility)
 - [f8x](https://github.com/ffffffff0x/f8x)
-# TODO 
-Convert this to ansible
