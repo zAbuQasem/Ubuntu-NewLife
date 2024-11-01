@@ -41,17 +41,17 @@ function add_repos() {
 function install_core() {
   echo -e "${CYAN}\n[*] Installing Core Utilities...${NC}"
   sudo apt install -y nautilus python3-launchpadlib build-essential fzf zsh snapd linux-headers-generic jq \
-    dirmngr numlockx brightnessctl xkb-switch exiftool gnupg apt-transport-https gdebi-core ca-certificates \
+    dirmngr numlockx exiftool gnupg apt-transport-https gdebi-core ca-certificates \
     vim python3-dev python3-pip python3-distutils python3-venv p7zip-full zip unzip net-tools \
     gdebi openssh-server vsftpd samba sqlite3 default-jre gdb strace ltrace obs-studio flameshot \
-    zsh wireshark plocate xsel xclip wl-clipboard ripgrep npm php fd-find bat smbclient nginx ipython3 most 2>&1 | tee -a "${errorlog}" || true
+    zsh wireshark plocate xsel xclip wl-clipboard ripgrep npm fd-find bat smbclient nginx ipython3 most stacer 2>&1 | tee -a "${errorlog}" || true
 }
 
 # Install Missing Libraries and Utilities
 function install_additional_libs() {
   echo -e "${CYAN}\n[*] Installing Additional Libraries and Utilities...${NC}"
-  sudo apt install -y arandr flameshot arc-theme feh i3blocks i3status i3 i3-wm lxappearance python3-pip \
-    rofi unclutter cargo compton papirus-icon-theme imagemagick libxcb-shape0-dev libxcb-keysyms1-dev \
+  sudo apt install -y arandr flameshot arc-theme feh lxappearance python3-pip \
+    rofi unclutter papirus-icon-theme imagemagick libxcb-shape0-dev libxcb-keysyms1-dev \
     libpango1.0-dev libxcb-util0-dev xcb libxcb1-dev libxcb-icccm4-dev libyajl-dev libev-dev libxcb-xkb-dev \
     libxcb-cursor-dev libxkbcommon-dev libxcb-xinerama0-dev libxkbcommon-x11-dev libstartup-notification0-dev \
     libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev autoconf meson libxcb-render-util0-dev libxcb-xfixes0-dev 2>&1 | tee -a "${errorlog}" || true
@@ -168,8 +168,9 @@ function install_devops_tools() {
   go install github.com/kubecolor/kubecolor@latest 2>&1 | tee -a "${errorlog}" || true
 
   # Configure Kubernetes apt repository
-  echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.31/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list 2>&1 | tee -a "${errorlog}" || true
-  sudo chmod 644 /etc/apt/sources.list.d/kubernetes.list 2>&1 | tee -a "${errorlog}" || true
+  curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+  chmod +x kubectl
+  sudo mv kubectl /usr/local/bin
 }
 
 # Final Cleanup and Reboot Prompt
