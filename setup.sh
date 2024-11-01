@@ -1,4 +1,4 @@
-#!/bin/bash -xe
+#!/bin/bash
 
 # Colors for output
 GREEN="\033[0;32m"
@@ -28,14 +28,6 @@ sudo ls /root &>/dev/null
 echo -e "${CYAN}\n[*] Installing Basic Dependencies...${NC}"
 sudo apt update -y
 sudo apt install -y software-properties-common curl wget unzip 2>&1 | tee -a "${errorlog}" || true
-
-# Adding Repositories
-function add_repos() {
-  echo -e "${CYAN}\n[*] Adding Repositories...${NC}"
-  echo yes | sudo add-apt-repository ppa:atareao/atareao 2>&1 | tee -a "${errorlog}" || true
-  echo yes | sudo add-apt-repository ppa:ondrej/php 2>&1 | tee -a "${errorlog}" || true
-  sudo apt update -y 2>&1 | tee -a "${errorlog}" || true
-}
 
 # Install Core Utilities
 function install_core() {
