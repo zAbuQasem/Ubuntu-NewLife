@@ -16,8 +16,8 @@ curl https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 # Run below commands to install my zshrc file....
-wget https://raw.githubusercontent.com/zAbuQasem/Ubuntu-NewLife/refs/heads/main/.zshrc
-mv .zshrc ~/.zshrc
+curl -o zshrc https://raw.githubusercontent.com/zAbuQasem/Ubuntu-NewLife/refs/heads/main/.zshrc
+mv zshrc ~/.zshrc
 ```
 ## Extras
 ```sh
