@@ -9,8 +9,10 @@ cd Ubuntu-NewLife
 ## OHMYZSH installation
  ```bash
 echo -e "\n[*] Installing OhMyZsh"
-sudo apt install zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sudo apt install -y zsh
+curl https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh -o /tmp/install.sh &&
+    sed -i 's/CHSH=no/CHSH=yes/g' /tmp/install.sh &&
+    echo "Y" | sh /tmp/install.sh
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 # Run below commands to install my zshrc file....
