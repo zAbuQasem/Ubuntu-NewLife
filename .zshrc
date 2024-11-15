@@ -200,7 +200,7 @@ alias ll="lsd -lah"
 alias svc-ports="kubectl get svc -A | awk -F' ' '{print \$6}' | grep ':' | tr \",\" \"\n\""
 alias argocd-expose="kubectl port-forward service/argo-cd-argocd-server -n argocd 8080:443 -n argocd"
 alias flush-dns="sudo resolvectl flush-caches ; sudo resolvectl statistics"
-alias new-server="curl -sS https://gist.githubusercontent.com/zAbuQasem/cbdc151a15277a96117b34b6c56934d9/raw/7daf4954acbb03ff755e9cc705e3541af73124a7/terminal.sh |c"
+alias new-server="curl -sS https://gist.githubusercontent.com/zAbuQasem/cbdc151a15277a96117b34b6c56934d9/raw/63888eaed1b94b52ef9af2f07f91a1caa031fda4/terminal.sh |c"
 alias gip="grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b'"
 
 
