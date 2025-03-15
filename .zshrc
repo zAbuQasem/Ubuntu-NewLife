@@ -17,13 +17,12 @@ export PAGER="most"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
-ZSH_THEME="miloshadzic"
+#ZSH_THEME="miloshadzic"
 #ZSH_THEME="gnzh"
 #ZSH_THEME="jnrowe"
 #ZSH_THEME="af-magic"
 #ZSH_THEME="miloshadzic"
-# ZSH_THEME="powerlevel10k/powerlevel10k"
-
+ZSH_THEME="powerlevel10k/powerlevel10k"
 #
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -85,13 +84,13 @@ ZSH_THEME="miloshadzic"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git kube-ps1 command-not-found tmux fzf ssh-agent zsh-syntax-highlighting zsh-autosuggestions web-search)
+plugins=(git kube-ps1 tmux fzf ssh-agent zsh-syntax-highlighting zsh-autosuggestions web-search)
 
 source $ZSH/oh-my-zsh.sh
 
 #source $ZSH_CUSTOM/plugins/fzf-tab-completion/zsh/fzf-zsh-completion.sh
 #FZF_COMPLETION_AUTO_COMMON_PREFIX_PART=true
-#bindkey '^I' fzf_completion
+bindkey '^I' fzf_completion
 
 RPROMPT='$(kube_ps1)'
 
@@ -182,41 +181,78 @@ export GOPATH=$HOME/go
 export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/bin:$PATH:/snap/bin:$HOME/.cargo/env:$HOME/.cargo/bin/
 export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 
-alias vim='nvim'
+# General aliases
+alias vim='/usr/bin/nvim'
 alias ؤمثشق='clear'
-alias c="xclip -sel clip"
+alias c="DISPLAY=:0 xclip -sel clip"
+alias cat='batcat'
+alias gip="grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b'"
+
+# Git aliases
 alias pullall='for dir in */; do if [ -d "$dir/.git" ]; then echo -e "\e[32m[+] Pulling $dir\e[0m" && (cd "$dir" && git pull) ; echo ; fi; done'
 #alias pullall="ls | xargs -P10 -I{} echo \"[+] Pulling {}\" && git -C {} pull"
+
+# Kubernetes aliases
 source <(kubectl completion zsh)
 source <(helm completion zsh)
 compdef kubecolor=kubectl
 alias k="kubecolor"
 alias ktx="kubectl config use-context"
-alias cat='batcat'
-alias argocd-creds='kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | c '
-alias tfmt='find ./ -type f -name "*.tf" -exec terraform fmt {} \;'
-alias ls="lsd"
-alias ll="lsd -lah"
 alias svc-ports="kubectl get svc -A | awk -F' ' '{print \$6}' | grep ':' | tr \",\" \"\n\""
+alias argocd-creds='kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d | c '
 alias argocd-expose="kubectl port-forward service/argo-cd-argocd-server -n argocd 8080:443 -n argocd"
+
+# Terraform and Packer aliases
+alias tfmt='terraform fmt -recursive -check'
+alias pfmt='echo "Formatting with packer fmt -recursive=true ."; packer fmt -recursive=true .'
+
+# Docker aliases
+alias dc-chal='docker compose --profile chal up --build'
+alias dc-dist='docker compose --profile dist up --build'
+alias dc-clean='docker system prune -f'
+alias dc-logs='docker compose logs -f'
+
+# Miscellaneous aliases
 alias flush-dns="sudo resolvectl flush-caches ; sudo resolvectl statistics"
-alias new-server="curl -sS https://gist.githubusercontent.com/zAbuQasem/cbdc151a15277a96117b34b6c56934d9/raw/63888eaed1b94b52ef9af2f07f91a1caa031fda4/terminal.sh |c"
-alias gip="grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b'"
+alias new-server="curl -sS https://gist.githubusercontent.com/zAbuQasem/cbdc151a15277a96117b34b6c56934d9/raw/21b17e5b0f0b2e7baae0165859f67db114a738db/terminal.sh |c"
+alias g="google examtopics exam google associate cloud engineer question $1"
 
 
 
+# Function to quickly check if a TCP port is open on a given host.
+# Usage: quick-ping <host>:<port>
+# Example: quick-ping google.com:80
 quick-ping (){ DST="$@"; timeout 1 bash -c "echo > /dev/tcp/$DST &>/dev/null" &>/dev/null && echo '[+] Open' || echo '[!] Closed'  }
+
+# Function to print the command used by quick-ping for debugging purposes.
+# Usage: quick-ping-p <host>:<port>
+# Example: quick-ping-p google.com:80
 quick-ping-p (){ DST="$@"; echo "timeout 1 bash -c 'echo > /dev/tcp/$DST &>/dev/null' &>/dev/null && echo '[+] Open' || echo '[!] Closed'"  }
+
+# Function to get help on a command using tgpt.
+# Usage: howto <command>
+# Example: howto ls
 howto (){ CMD="$@"; /usr/local/bin/tgpt "$CMD" }
+
+# Function to add, commit, pull, and show the latest commit in a git repository.
+# Usage: pullpush <commit_message>
+# Example: pullpush "Initial commit"
 pullpush (){ CommitMSG="$@"; git add . ; git commit -m "$CommitMSG"; git pull ;git show }
+
+# Function to encode a string or stdin to base64.
+# Usage: b64 <string> or echo <string> | b64
+# Example: b64 "hello"
 b64() { [ -p /dev/stdin ] && base64 -w0 || echo -n "$@" | base64 -w0; }
+
+# Function to decode a base64 string or stdin.
+# Usage: b64d <base64_string> or echo <base64_string> | b64d
+# Example: b64d "aGVsbG8="
 b64d() { [ -p /dev/stdin ] && base64 -d -w0 || echo -n "$@" | base64 -d -w0; }
+
+# Function to get the size of a Docker image.
+# Usage: dockersize <image_name>
+# Example: dockersize ubuntu:latest
 dockersize() { docker manifest inspect -v "$1" | jq -c 'if type == "array" then .[] else . end' |  jq -r '[ ( .Descriptor.platform | [ .os, .architecture, .variant, ."os.version" ] | del(..|nulls) | join("/") ), ( [ .SchemaV2Manifest.layers[].size ] | add ) ] | join(" ")' | numfmt --to iec --format '%.2f' --field 2 | column -t ; }
-
-
-complete -C '/usr/local/bin/aws_completer' aws
-
-
 
 
 SSHCONFIG (){
@@ -266,7 +302,7 @@ Host $ALIAS
   HostName ${HOST} 
   User ${SSH_ARGS%@*}
   Port ${PORT}
-  IdentityFile $(pwd)/$PRIVATE_KEY
+  IdentityFile ${PRIVATE_KEY}
 EOF
     echo -e "\e[32m[Success]: SSH configuration added for $ALIAS\e[0m"
   else
@@ -287,10 +323,10 @@ new_chall(){
   local NC='\033[0m'
 	if [ "$#" -ne "0" ];
 	then
-		mkdir -p "$1"/{chal,dist,writeup}
+		mkdir -p "$1"/{chal,writeup}
     touch "$1"/summary.toml
-    cp docker-compose.yaml "$1"
-    cd "$1/chal"
+    cp ~/metactf-challenges/docker-compose.yaml "$1"
+    cd "$1"
 	else
 		echo -e "${RED}[!] Usage: $0 <CHALL-NAME> ${NC}"
 	fi
@@ -330,7 +366,3 @@ export PATH=/home/${USER}/bin:$PATH
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fpath=(/home/"${USER}"/.oh-my-zsh/custom/completions /home/"${USER}"/.oh-my-zsh/custom/completions /home/"${USER}"/.oh-my-zsh/custom/plugins/zsh-autosuggestions /home/"${USER}"/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting /home/"${USER}"/.oh-my-zsh/plugins/ssh-agent /home/"${USER}"/.oh-my-zsh/plugins/fzf /home/"${USER}"/.oh-my-zsh/plugins/tmux /home/"${USER}"/.oh-my-zsh/plugins/command-not-found /home/"${USER}"/.oh-my-zsh/plugins/git /home/"${USER}"/.oh-my-zsh/functions /home/"${USER}"/.oh-my-zsh/completions /home/"${USER}"/.oh-my-zsh/cache/completions /usr/local/share/zsh/site-functions /usr/share/zsh/vendor-functions /usr/share/zsh/vendor-completions /usr/share/zsh/functions/Calendar /usr/share/zsh/functions/Chpwd /usr/share/zsh/functions/Completion /usr/share/zsh/functions/Completion/AIX /usr/share/zsh/functions/Completion/BSD /usr/share/zsh/functions/Completion/Base /usr/share/zsh/functions/Completion/Cygwin /usr/share/zsh/functions/Completion/Darwin /usr/share/zsh/functions/Completion/Debian /usr/share/zsh/functions/Completion/Linux /usr/share/zsh/functions/Completion/Mandriva /usr/share/zsh/functions/Completion/Redhat /usr/share/zsh/functions/Completion/Solaris /usr/share/zsh/functions/Completion/Unix /usr/share/zsh/functions/Completion/X /usr/share/zsh/functions/Completion/Zsh /usr/share/zsh/functions/Completion/openSUSE /usr/share/zsh/functions/Exceptions /usr/share/zsh/functions/MIME /usr/share/zsh/functions/Math /usr/share/zsh/functions/Misc /usr/share/zsh/functions/Newuser /usr/share/zsh/functions/Prompts /usr/share/zsh/functions/TCP /usr/share/zsh/functions/VCS_Info /usr/share/zsh/functions/VCS_Info/Backends /usr/share/zsh/functions/Zftp /usr/share/zsh/functions/Zle)
-
-# add Pulumi to the PATH
-export PATH=$PATH:/home/"${USER}"/.pulumi/bin
