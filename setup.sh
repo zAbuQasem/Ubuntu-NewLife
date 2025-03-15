@@ -21,6 +21,9 @@ touch "${errorlog}"
 # Function to log errors
 trap 'echo -e "${RED}An error occurred. Check ${errorlog}${NC}"; exit 1' ERR
 
+# minimize on click apps from dock
+gsettings set org.gnome.shell.extensions.dash-to-dock click-action 'minimize'
+
 # Ensuring Sudo will not prompt for a password for some time
 sudo ls /root &>/dev/null
 
