@@ -184,7 +184,7 @@ export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
 # General aliases
 alias vim='/usr/bin/nvim'
 alias ؤمثشق='clear'
-alias c="DISPLAY=:0 xclip -sel clip"
+alias c="xclip -sel clip"
 alias cat='batcat'
 alias gip="grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b'"
 
