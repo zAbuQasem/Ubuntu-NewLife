@@ -107,10 +107,10 @@ mode "resize" {
     bindsym semicolon resize grow width 10 px or 10 ppt
 
     # same bindings, but for the arrow keys
-    bindsym Left resize shrink width 10 px or 10 ppt
+    bindsym Left resize grow width 10 px or 10 ppt
     bindsym Down resize grow height 10 px or 10 ppt
     bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize grow width 10 px or 10 ppt
+    bindsym Right resize shrink width 10 px or 10 ppt
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -122,16 +122,16 @@ bindsym $mod+r mode "resize"
 # i3bar with i3blocks
 bar {
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
-        i3bar_command i3bar -t
-        position top
-        height 26
-        font pango:RobotoMono Nerd Font Regular 7.5
-        colors {
-            statusline #EEEEEE
-            background #1C1D2B88
-            focused_workspace #282A3E88 #282A3E88 #FFFFFF
-            statusline #E6FFF5
-        }
+    i3bar_command i3bar -t
+    position top
+    height 26
+    font pango:RobotoMono Nerd Font Regular 7.5
+    colors {
+        statusline #EEEEEE
+        background #1C1D2B88
+        focused_workspace #282A3E88 #282A3E88 #FFFFFF
+        statusline #E6FFF5
+    }
 }
 
 # i3-gaps
@@ -171,34 +171,8 @@ exec_always --no-startup-id "setxkbmap -layout us,ar"
 bindsym XF86MonBrightnessUp exec brightnessctl set +5% # increase screen brightness
 bindsym XF86MonBrightnessDown exec brightnessctl set 5%- # decrease screen brightness
 
-# Display/Monitor configuration (Press $mod+m)
-set $mode_display Display: (l) laptop only, (e) external only, (d) duplicate, (x) extend right, (z) extend left, (a) auto detect
-
-mode "$mode_display" {
-    # Laptop screen only
-    bindsym l exec --no-startup-id xrandr --output eDP-1 --auto --output HDMI-1 --off --output DP-1 --off --output VGA-1 --off, mode "default"
-    
-    # External monitor only (HDMI)
-    bindsym e exec --no-startup-id xrandr --output HDMI-1 --auto --output eDP-1 --off --output DP-1 --off --output VGA-1 --off, mode "default"
-    
-    # Duplicate displays
-    bindsym d exec --no-startup-id xrandr --output eDP-1 --auto --output HDMI-1 --auto --same-as eDP-1, mode "default"
-    
-    # Extend to the right
-    bindsym x exec --no-startup-id xrandr --output eDP-1 --auto --output HDMI-1 --auto --right-of eDP-1, mode "default"
-    
-    # Extend to the left
-    bindsym z exec --no-startup-id xrandr --output eDP-1 --auto --output HDMI-1 --auto --left-of eDP-1, mode "default"
-    
-    # Auto detect and configure
-    bindsym a exec --no-startup-id arandr, mode "default"
-
-    # back to normal: Enter or Escape
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-
-bindsym $mod+m mode "$mode_display"
+# Display/Monitor auto configuration
+bindsym $mod+m exec --no-startup-id arandr
 
 
 # shutdown / restart / suspend...  (Press $mod+backspace)

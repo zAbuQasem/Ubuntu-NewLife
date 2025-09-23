@@ -32,7 +32,7 @@ update_system() {
 install_i3_packages() {
     log "Installing i3 and related packages..."
     sudo apt-get install -y \
-        arandr flameshot arc-theme feh i3blocks i3status i3 i3-wm \
+        arandr flameshot arc-theme feh i3blocks i3status i3 i3-wm git \
         lxappearance python3-pip rofi unclutter cargo compton \
         papirus-icon-theme imagemagick brightnessctl x11-xserver-utils numlockx
     check_status "i3 packages installation"
@@ -264,14 +264,38 @@ install_i3_gaps() {
 
 # Function to clone i3-volume
 clone_i3_volume() {
-    log "Cloning i3-volume..."
-    if [ -d "$HOME/i3-volume" ]; then
-        log "Removing existing i3-volume directory..."
-        rm -rf "$HOME/i3-volume"
+    log "Cloning i3-volume into ~/.config/i3/i3-volume..."
+    local target_dir="$HOME/.config/i3/i3-volume"
+    mkdir -p "$(dirname "$target_dir")"
+
+    if [ -d "$target_dir" ]; then
+        log "Removing existing $target_dir ..."
+        rm -rf "$target_dir"
     fi
-    
-    git clone https://github.com/hastinbe/i3-volume.git ~/i3-volume
+
+    git clone --depth 1 https://github.com/hastinbe/i3-volume.git "$target_dir"
     check_status "i3-volume repository clone"
+
+    # Ensure the main script is executable
+    if [ -f "$target_dir/volume" ]; then
+        chmod +x "$target_dir/volume"
+    fi
+
+    # Create a compatibility wrapper so 'volume' works from PATH
+    local bin_dir="$HOME/.local/bin"
+    mkdir -p "$bin_dir"
+    cat > "$bin_dir/volume" <<'EOF'
+#!/usr/bin/env bash
+exec "$HOME/.config/i3/i3-volume/volume" "$@"
+EOF
+    chmod +x "$bin_dir/volume"
+    log "Created wrapper at $bin_dir/volume pointing to $target_dir/volume"
+
+    # Remove legacy location if it exists to avoid confusion
+    if [ -d "$HOME/i3-volume" ]; then
+        rm -rf "$HOME/i3-volume"
+        log "Removed legacy ~/i3-volume directory"
+    fi
 }
 
 # Function to create configuration directories
@@ -320,12 +344,20 @@ copy_config_files() {
 
 # Function to configure i3-volume
 configure_i3_volume() {
-    log "Configuring i3-volume..."
-    if [ -f ~/i3-volume/i3volume-pulseaudio.conf ] && [ -f ~/.config/i3/config ]; then
-        cat ~/i3-volume/i3volume-pulseaudio.conf >> ~/.config/i3/config
-        check_status "i3-volume configuration"
+    log "Configuring i3-volume (appending pulseaudio bindings if not present)..."
+    local conf_src="$HOME/.config/i3/i3-volume/i3volume-pulseaudio.conf"
+    local conf_dest="$HOME/.config/i3/config"
+
+    if [ -f "$conf_src" ] && [ -f "$conf_dest" ]; then
+        # Append only if a known marker from the file is not already present
+        if ! grep -q "i3volume" "$conf_dest" && ! grep -q "XF86Audio" "$conf_dest"; then
+            cat "$conf_src" >> "$conf_dest"
+            check_status "i3-volume configuration appended"
+        else
+            log "i3-volume bindings appear to already be present; skipping append"
+        fi
     else
-        log "⚠ Warning: i3-volume configuration files not found"
+        log "⚠ Warning: i3-volume configuration source or destination not found"
     fi
 }
 
