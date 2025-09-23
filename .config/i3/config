@@ -1,4 +1,3 @@
-
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -20,35 +19,20 @@ bindsym $mod+Shift+q kill
 # app launcher with icons (Rofi drun)
 bindsym $mod+d exec --no-startup-id rofi -show drun -config ~/.config/rofi/config.rasi
 
-# change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+# Open ClipBoard
+bindsym $mod+v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}' -config ~/.config/rofi/clipboard.rasi
 
-# alternatively, you can use the cursor keys:
+# Use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
-# move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
-
-# alternatively, you can use the cursor keys:
+# Use the cursor keys:
 bindsym $mod+Shift+Left move left
 bindsym $mod+Shift+Down move down
 bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
-
-# split in horizontal orientation
-bindsym $mod+h split h
-
-# split in vertical orientation
-bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -73,11 +57,7 @@ bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
 bindsym $mod+4 workspace 4
 bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
+
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
@@ -85,11 +65,7 @@ bindsym $mod+Shift+2 move container to workspace 2
 bindsym $mod+Shift+3 move container to workspace 3
 bindsym $mod+Shift+4 move container to workspace 4
 bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
@@ -101,10 +77,10 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 # resize window (you can also use the mouse for that)
 mode "resize" {
     # same bindings, but for the arrow keys
-    bindsym Left resize grow width 10 px or 10 ppt
-    bindsym Down resize grow height 10 px or 10 ppt
-    bindsym Up resize shrink height 10 px or 10 ppt
-    bindsym Right resize shrink width 10 px or 10 ppt
+    bindsym Left resize grow width 5 px or 5 ppt
+    bindsym Down resize grow height 5 px or 5 ppt
+    bindsym Up resize shrink height 5 px or 5 ppt
+    bindsym Right resize shrink width 5 px or 5 ppt
 
     # back to normal: Enter or Escape
     bindsym Return mode "default"
@@ -119,7 +95,7 @@ bar {
     i3bar_command i3bar -t
     position top
     height 26
-    font pango:RobotoMono Nerd Font Regular 7.5
+    font pango:RobotoMono Nerd Font Regular 12
     colors {
         statusline #EEEEEE
         background #1C1D2B88
@@ -139,35 +115,15 @@ client.unfocused #333333 #333333 #888888
 client.urgent #900000 #900000 #ffffff
 default_border normal
 
-# feh - Wallpaper Setter
-exec_always --no-startup-id sh ~/.fehbg
-
-# compton - Compositing Manager for Shadows and Opacity
-exec_always --no-startup-id compton -b --config ~/.config/compton/compton.conf
-
-# VM Clipboard Fix (DISABLED)
-# exec_always --no-startup-id ~/.config/i3/clipboard_fix.sh
-
-# Resize Bindings
-bindsym $mod+Ctrl+Shift+Right resize shrink width 10 px or 10 ppt
-bindsym $mod+Ctrl+Shift+Up resize grow height 10 px or 10 ppt
-bindsym $mod+Ctrl+Shift+Down resize shrink height 10 px or 10 ppt
-bindsym $mod+Ctrl+Shift+Left resize grow width 10 px or 10 ppt
-
 # screenshot
 bindsym $mod+P exec flameshot gui
 
-# change keyboard layout english, arabic
-exec_always --no-startup-id "setxkbmap -option 'grp:alt_shift_toggle'"
-exec_always --no-startup-id "setxkbmap -layout us,ar"
-
 # Brightness control
 bindsym XF86MonBrightnessUp exec brightnessctl set +5% # increase screen brightness
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%- # decrease screen brightness
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- # decrease scrPeen brightness
 
 # Display/Monitor auto configuration
 bindsym $mod+m exec --no-startup-id arandr
-
 
 # shutdown / restart / suspend...  (Press $mod+backspace)
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (CTRL+s) shutdown
@@ -189,6 +145,23 @@ bindsym $mod+BackSpace mode "$mode_system"
 
 # Enable NumLock on startup
 exec_always --no-startup-id numlockx on
+
+# Greenclip - Clipboard Manager
+exec_always --no-startup-id /usr/local/bin/greenclip daemon &
+
+# feh - Wallpaper Setter
+exec_always --no-startup-id sh ~/.fehbg
+
+# compton - Compositing Manager for Shadows and Opacity
+exec_always --no-startup-id compton -b --config ~/.config/compton/compton.conf
+
+# change keyboard layout english, arabic
+exec_always --no-startup-id "setxkbmap -option 'grp:alt_shift_toggle'"
+exec_always --no-startup-id "setxkbmap -layout us,ar"
+
+
+# VM Clipboard Fix (DISABLED)
+# exec_always --no-startup-id ~/.config/i3/clipboard_fix.sh
 
 # Vmware ClipBoard fix and file drag&drop (Uncomment when using vm) https://superuser.com/questions/1632506/i3-in-vmware-doesnt-share-clipboard-with-host-windows-machine
 #exec_always --no-startup-id vmware-user-suid-wrapper

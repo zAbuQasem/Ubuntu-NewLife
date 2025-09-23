@@ -1,0 +1,135 @@
+/*
+ * Rofi Clipboard Mode Theme
+ * ------------------------------------------------------------
+ * Used via:
+ *   rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}' \
+ *        -config ~/.config/rofi/clipboard.rasi
+ *
+ * This is a lightweight variant of your main rofi theme, tuned for quickly
+ * searching and re‑using clipboard history (greenclip).
+ */
+
+configuration {
+	modi:               "clipboard:greenclip print";
+	show-icons:         false;              /* Clipboard entries usually text */
+	matching:           "regex";            /* Fuzzy/regex matching */
+	case-sensitive:     false;
+	sort:               true;
+	cycle:              true;
+
+	display-clipboard:  "Clipboard:";  /* Title shown for this modi */
+	/* Hide other modi list for a focused experience */
+	sidebar-mode:       false;
+}
+
+@theme "tokyo"
+
+* {
+	font:               "Iosevka Nerd Font 14";
+	background-color:   transparent;
+	text-color:         @fg0;
+
+	margin:     0px;
+	padding:    0px;
+	spacing:    0px;
+}
+
+window {
+	location:       center;
+	width:          720;            /* Wider to see more of each clipboard line */
+	y-offset:       -10;
+	border-radius:  24px;
+
+	border:         1px;
+	border-color:   @bg3;
+	background-color: @bg0;
+}
+
+mainbox {
+	padding:    16px 16px 12px;
+}
+
+inputbar {
+	background-color:   @bg1;
+	border-color:       @bg3;
+	border-radius:      16px;
+	border:             2px;
+
+	padding:    8px 16px;
+	spacing:    8px;
+	children:   [ prompt, entry ];
+}
+
+prompt {
+	text-color: @blue;
+}
+
+entry {
+	placeholder:        "Search clipboard…";
+	placeholder-color:  @cyan;
+}
+
+message {
+	margin:             12px 0 0;
+	border-radius:      16px;
+	border-color:       @bg2;
+	background-color:   @bg2;
+}
+
+textbox {
+	padding:            8px 16px;
+	background-color:   @bg2;
+}
+
+listview {
+	background-color:   transparent;
+	margin:             12px 0 0;
+	/* Show more history lines */
+	columns:            1;
+	lines:              15;
+	dynamic:            true;  /* Grow if needed */
+	scrollbar:          true;
+	fixed-height:       false;
+}
+
+scrollbar {
+	handle-color:       @bg3;
+	border-radius:      8px;
+	handle-width:       6px;
+}
+
+element {
+	padding:        6px 14px;
+	spacing:        8px;
+	border-radius:  12px;
+}
+
+element normal normal {
+	text-color: @fg0;
+}
+
+element normal urgent { text-color: @urgent; }
+
+element normal active { text-color: @accent; }
+
+element selected normal, element selected active {
+	background-color:   @bg2;
+	text-color:         @fg1;
+}
+
+element-icon { /* Not used, but kept for consistency */
+	size:           0.9em;
+	vertical-align: 0.5;
+}
+
+element-text {
+	text-color: inherit;
+}
+
+/* Optional subtle separator between entries (comment out if unwanted) */
+/* element { border: 0 0 1px 0; border-color: @bg1; } */
+
+/* Notes:
+   - greenclip trims/normalizes entries; configure it in ~/.config/greenclip.toml
+   - For custom actions (kb-custom-*), wrap the rofi invocation in a small script
+	 that inspects ROFI_RETV to decide what to do with the selected line. */

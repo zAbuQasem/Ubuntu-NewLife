@@ -348,6 +348,77 @@ copy_config_files() {
     fi
 }
 
+
+# Function to install and configure greenclip
+install_configure_greenclip() {
+  log "Installing and configuring greenclip..."
+  
+  # Create local bin directory if it doesn't exist
+  local bin_dir="$HOME/.local/bin"
+  mkdir -p "$bin_dir"
+  
+  # Download greenclip if not already present
+  local greenclip_path="$bin_dir/greenclip"
+  if [ ! -f "$greenclip_path" ]; then
+    log "Downloading greenclip v4.2..."
+    wget -O "$greenclip_path" https://github.com/erebe/greenclip/releases/download/v4.2/greenclip
+    check_status "greenclip download"
+    
+    # Make it executable
+    chmod +x "$greenclip_path"
+    log "✓ Made greenclip executable"
+  else
+    log "✓ greenclip already exists at $greenclip_path"
+  fi
+  
+  # Create systemd user service for greenclip daemon
+  log "Creating greenclip systemd service..."
+  local service_dir="$HOME/.config/systemd/user"
+  mkdir -p "$service_dir"
+  
+  cat > "$service_dir/greenclip.service" <<EOF
+[Unit]
+Description=Greenclip clipboard manager
+After=graphical-session.target
+
+[Service]
+Type=simple
+ExecStart=$greenclip_path daemon
+Restart=on-failure
+RestartSec=3
+Environment=DISPLAY=:0
+
+[Install]
+WantedBy=default.target
+EOF
+  
+  # Reload systemd user daemon and enable the service
+  systemctl daemon-reload
+  systemctl enable greenclip.service
+  systemctl start greenclip.service
+  check_status "greenclip service creation and startup"
+  
+  # Configure greenclip
+  log "Configuring greenclip..."
+  mkdir -p ~/.config/greenclip
+  local conf_src="$SCRIPT_DIR/.config/greenclip/config"
+  local conf_dest="$HOME/.config/greenclip/config"
+  
+  if [ -f "$conf_src" ]; then
+    cp "$conf_src" "$conf_dest"
+    check_status "greenclip configuration copy"
+  else
+    log "⚠ Warning: greenclip configuration source not found"
+  fi
+  
+  # Verify installation
+  if command -v greenclip >/dev/null 2>&1 || [ -x "$greenclip_path" ]; then
+    log "✓ greenclip installed and configured successfully"
+  else
+    log "⚠ Warning: greenclip installation may have failed"
+  fi
+}
+
 # Function to configure i3-volume
 configure_i3_volume() {
     log "Configuring i3-volume (appending pulseaudio bindings if not present)..."
