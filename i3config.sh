@@ -313,7 +313,7 @@ copy_config_files() {
     log "Copying configuration files..."
     local config_files=(
         ".config/i3/config:~/.config/i3/config"
-        ".config/alacritty/alacritty.yml:~/.config/alacritty/alacritty.yml"
+        ".config/alacritty/alacritty.toml:~/.config/alacritty/alacritty.toml"
         ".config/i3/i3blocks.conf:~/.config/i3/i3blocks.conf"
         ".config/compton/compton.conf:~/.config/compton/compton.conf"
         ".config/rofi/config:~/.config/rofi/config"
@@ -335,6 +335,11 @@ copy_config_files() {
         fi
     done
     
+    # If a legacy YAML Alacritty config exists at destination, suggest migration once
+    if [ -f "$HOME/.config/alacritty/alacritty.yml" ]; then
+        log "ℹ Detected legacy Alacritty YAML config at ~/.config/alacritty/alacritty.yml. Consider migrating with 'alacritty migrate'."
+    fi
+
     # Make battery-plus executable
     if [ -f ~/.config/i3/battery-plus ]; then
         chmod +x ~/.config/i3/battery-plus

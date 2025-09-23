@@ -5,6 +5,9 @@ set $mod Mod4
 # is used in the bar {} block below.
 font pango:RobotoMono Nerd Font Regular 9
 
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -55,9 +58,6 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
 
@@ -100,12 +100,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-    # These bindings trigger as soon as you enter the resize mode
-    bindsym j resize shrink width 10 px or 10 ppt
-    bindsym k resize grow height 10 px or 10 ppt
-    bindsym l resize shrink height 10 px or 10 ppt
-    bindsym semicolon resize grow width 10 px or 10 ppt
-
     # same bindings, but for the arrow keys
     bindsym Left resize grow width 10 px or 10 ppt
     bindsym Down resize grow height 10 px or 10 ppt
