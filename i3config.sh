@@ -34,7 +34,7 @@ install_i3_packages() {
     sudo apt-get install -y \
         arandr flameshot arc-theme feh i3blocks i3status i3 i3-wm \
         lxappearance python3-pip rofi unclutter cargo compton \
-        papirus-icon-theme imagemagick brightnessctl xrandr numlockx
+        papirus-icon-theme imagemagick brightnessctl x11-xserver-utils numlockx
     check_status "i3 packages installation"
 }
 
@@ -105,25 +105,21 @@ install_alacritty_deb() {
 
 # Function to get latest Nerd Fonts version from GitHub API
 get_latest_nerd_fonts_version() {
-    log "Fetching latest Nerd Fonts version from GitHub..."
     local api_url="https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest"
     local version
     
     if command -v curl >/dev/null 2>&1; then
-        version=$(curl -s "$api_url" | grep '"tag_name"' | cut -d'"' -f4)
+        version=$(curl -s "$api_url" | grep '"tag_name"' | cut -d'"' -f4 | tr -d '\n\r')
     elif command -v wget >/dev/null 2>&1; then
-        version=$(wget -qO- "$api_url" | grep '"tag_name"' | cut -d'"' -f4)
+        version=$(wget -qO- "$api_url" | grep '"tag_name"' | cut -d'"' -f4 | tr -d '\n\r')
     else
-        log "⚠ Warning: Neither curl nor wget found. Using fallback version v3.4.0"
         version="v3.4.0"
     fi
     
-    if [ -z "$version" ]; then
-        log "⚠ Warning: Failed to fetch latest version. Using fallback version v3.4.0"
+    if [ -z "$version" ] || [[ ! "$version" =~ ^v[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
         version="v3.4.0"
     fi
     
-    log "Latest Nerd Fonts version: $version"
     echo "$version"
 }
 
@@ -133,8 +129,17 @@ install_fonts() {
     mkdir -p ~/.local/share/fonts/
     
     local fonts_dir="$HOME/.local/share/fonts"
+    
+    log "Fetching latest Nerd Fonts version from GitHub..."
     local nerd_fonts_version
     nerd_fonts_version=$(get_latest_nerd_fonts_version)
+    
+    if [ -z "$nerd_fonts_version" ]; then
+        log "✗ Error: Failed to get Nerd Fonts version"
+        return 1
+    fi
+    
+    log "Latest Nerd Fonts version: $nerd_fonts_version"
     
     # Define fonts to download with their archive names
     local fonts=(
@@ -150,6 +155,7 @@ install_fonts() {
     local base_url="https://github.com/ryanoasis/nerd-fonts/releases/download/${nerd_fonts_version}"
     
     log "Downloading fonts from Nerd Fonts ${nerd_fonts_version}..."
+    log "Base URL: ${base_url}"
     
     for font_info in "${fonts[@]}"; do
         local font_name="${font_info%:*}"
@@ -209,6 +215,24 @@ install_fonts() {
     log "Updating font cache..."
     fc-cache -fv >/dev/null 2>&1
     check_status "Font installation and cache update"
+    
+    # Clean up downloaded archives
+    log "Cleaning up downloaded font archives..."
+    local cleaned_count=0
+    for font_info in "${fonts[@]}"; do
+        local archive_name="${font_info#*:}"
+        if [ -f "$archive_name" ]; then
+            rm -f "$archive_name"
+            log "✓ Removed $archive_name"
+            ((cleaned_count++))
+        fi
+    done
+    
+    if [ $cleaned_count -gt 0 ]; then
+        log "✓ Cleaned up $cleaned_count font archives"
+    else
+        log "ℹ No font archives to clean up"
+    fi
     
     # Display installed fonts count
     local font_count
