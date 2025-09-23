@@ -494,3 +494,6 @@ if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
     main "$@"
 fi
 
+
+
+# install sudo apt install network-manager network-manager-applet

@@ -51,8 +51,8 @@ bindsym $mod+a focus parent
 # focus the child container
 #bindsym $mod+d focus child
 
-# switch between windows (super+tab)
-bindsym $mod+Tab exec --no-startup-id rofi -show combi -modes combi -combi-modes window#ssh
+# switch between windows (super+tab) - window-only config
+bindsym $mod+Tab exec --no-startup-id rofi -show window -config ~/.config/rofi/window-mngr.rasi
 
 # switch to workspace
 bindsym $mod+1 workspace 1
@@ -162,6 +162,8 @@ exec_always --no-startup-id compton -b --config ~/.config/compton/compton.conf
 exec_always --no-startup-id "setxkbmap -option 'grp:alt_shift_toggle'"
 exec_always --no-startup-id "setxkbmap -layout us,ar"
 
+# Wifi Manager
+exec_always --no-startup-id nm-applet
 
 # VM Clipboard Fix (DISABLED)
 # exec_always --no-startup-id ~/.config/i3/clipboard_fix.sh
