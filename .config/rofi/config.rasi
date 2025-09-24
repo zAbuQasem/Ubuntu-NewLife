@@ -3,6 +3,7 @@ configuration {
     sorting-method: "normal";
     show-icons:true;
     matching: "regex";
+    sort: false;
     drun-match-fields: "name";
     display-run: "Menu:";
     display-ssh: "SSH:";
