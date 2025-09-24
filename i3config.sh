@@ -31,7 +31,10 @@ echo "Installing i3-gaps..."
 sudo apt install -y meson ninja-build libxcb-shape0-dev libxcb-keysyms1-dev \
     libpango1.0-dev libxcb-util0-dev libxcb1-dev libxcb-icccm4-dev libyajl-dev \
     libev-dev libxkbcommon-dev libxcb-xinerama0-dev libstartup-notification0-dev \
-    libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev autoconf
+    libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev autoconf gcc make pkg-config \
+    libpam0g-dev libcairo2-dev libfontconfig1-dev libxcb-composite0-dev \
+    libx11-xcb-dev libxcb-xkb-dev libxcb-image0-dev libxkbcommon-x11-dev \
+    libjpeg-dev libgif-dev
 
 if [ ! -d "i3-gaps" ]; then
     git clone https://github.com/Airblader/i3 i3-gaps
@@ -39,6 +42,14 @@ if [ ! -d "i3-gaps" ]; then
     meson .. && ninja && sudo ninja install
     cd ../..
 fi
+
+# Install i3lock-color
+echo "Installing i3lock-color..."
+git clone https://github.com/Raymo111/i3lock-color.git
+cd i3lock-color
+./install-i3lock-color.sh
+cd ..
+rm -rf i3lock-color
 
 # Install i3-volume for audio control
 echo "Installing i3-volume..."
