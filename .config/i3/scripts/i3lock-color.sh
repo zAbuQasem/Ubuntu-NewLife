@@ -27,7 +27,7 @@ i3lock \
 --keyhl-color=$WRONG         \
 --bshl-color=$WRONG          \
 \
---screen 1                   \
+--screen 2                   \
 --blur 5                     \
 --clock                      \
 --indicator                  \
