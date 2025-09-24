@@ -81,3 +81,61 @@ sudo apt-mark hold linux-image-$(uname -r)
 - [Weaponize Kali](https://github.com/snovvcrash/WeaponizeKali.sh)
 - [Install Volatility](https://pwnsec-notes.gitbook.io/ctf-notes/forensics/memory#installing-volatility)
 - [f8x](https://github.com/ffffffff0x/f8x)
+
+---
+
+## i3 Window Manager Key Bindings
+
+`$mod` = Super (Windows) key
+
+### Window & Layout Control
+| Shortcut | Action |
+|----------|--------|
+| $mod+Return | Open terminal (Alacritty) |
+| $mod+Shift+q | Close focused window |
+| $mod+d | Application launcher (rofi) |
+| $mod+Tab | Window switcher (rofi window mode) |
+| $mod+Shift+space | Toggle floating / tiling |
+| $mod+space | Toggle focus between tiling / floating |
+| $mod+f | Fullscreen toggle |
+| $mod+s | Stacked layout |
+| $mod+w | Tabbed layout |
+| $mod+e | Toggle split layout |
+| $mod+a | Focus parent container |
+
+### Focus / Movement
+| Shortcut | Action |
+|----------|--------|
+| $mod+Left / Down / Up / Right | Move focus |
+| $mod+Shift+Left / Down / Up / Right | Move window |
+
+### Workspaces
+| Shortcut | Action |
+|----------|--------|
+| $mod+1..5 (or more if configured) | Switch to workspace 1..5 |
+| $mod+Shift+1..5 | Move window to workspace 1..5 |
+
+### Resize Mode (Enter with $mod+r)
+| Shortcut (in resize mode) | Action |
+|---------------------------|--------|
+| Left / Down / Up / Right | Grow/shrink width/height |
+| Return / Escape | Exit resize mode |
+
+### System & Session
+| Shortcut | Action |
+|----------|--------|
+| $mod+Shift+c | Reload i3 config |
+| $mod+Shift+r | Restart i3 |
+| $mod+Shift+e | Exit i3 session |
+| $mod+BackSpace | System menu (lock/logout/suspend/hibernate/reboot/shutdown) |
+| XF86MonBrightnessUp / Down | Adjust screen brightness |
+| $mod+P | Screenshot (flameshot) |
+| Alt+Shift | Toggle English/Arabic keyboard layout |
+
+### Display & Utilities
+| Shortcut | Action |
+|----------|--------|
+| $mod+m | Open arandr (display configuration) |
+
+> Clipboard: `$mod+v` launches Rofi clipboard (greenclip). Add/remove additional workspaces or bindings in `~/.config/i3/config`.
+
