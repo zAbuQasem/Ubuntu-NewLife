@@ -71,11 +71,59 @@ if [ ! -f "/usr/local/bin/xkblayout-state" ]; then
 fi
 
 # Install Nerd Fonts
-echo "Installing FiraCode Nerd Font..."
+echo "Installing Nerd Fonts..."
 cd /tmp
-wget -q https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/FiraCode.tar.xz
-tar -xf FiraCode.tar.xz -C ~/.local/share/fonts/
+fonts=("FiraCode" "JetBrainsMono" "Hack" "Iosevka" "RobotoMono" "SourceCodePro")
+
+for font in "${fonts[@]}"; do
+    echo "Installing ${font}..."
+    wget -q "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.4.0/${font}.tar.xz"
+    tar -xf "${font}.tar.xz" -C ~/.local/share/fonts/
+    rm "${font}.tar.xz"
+done
+
 fc-cache -f
-rm FiraCode.tar.xz
+
+# Configure brightnessctl with suid permissions
+echo "Setting up brightnessctl with suid..."
+sudo chmod u+s /usr/bin/brightnessctl
+
+# Install greenclip clipboard manager
+echo "Installing greenclip..."
+mkdir -p ~/.config/greenclip
+if [ ! -f /usr/local/bin/greenclip ]; then
+    wget -O /tmp/greenclip https://github.com/erebe/greenclip/releases/download/v4.2/greenclip
+    sudo cp /tmp/greenclip /usr/local/bin/
+    sudo chmod +x /usr/local/bin/greenclip
+    rm /tmp/greenclip
+fi
+
+# Copy additional config files
+[ -f "$SCRIPT_DIR/.config/compton/compton.conf" ] && {
+    mkdir -p ~/.config/compton
+    cp "$SCRIPT_DIR/.config/compton/compton.conf" ~/.config/compton/
+}
+
+[ -f "$SCRIPT_DIR/.config/rofi/theme.rasi" ] && cp "$SCRIPT_DIR/.config/rofi/theme.rasi" ~/.config/rofi/
+
+[ -f "$SCRIPT_DIR/.config/i3/clipboard_fix.sh" ] && {
+    cp "$SCRIPT_DIR/.config/i3/clipboard_fix.sh" ~/.config/i3/
+    chmod +x ~/.config/i3/clipboard_fix.sh
+}
+
+[ -f "$SCRIPT_DIR/.config/i3/battery-plus" ] && {
+    cp "$SCRIPT_DIR/.config/i3/battery-plus" ~/.config/i3/
+    chmod +x ~/.config/i3/battery-plus
+}
+
+[ -f "$SCRIPT_DIR/.config/greenclip/config" ] && cp "$SCRIPT_DIR/.config/greenclip/config" ~/.config/greenclip/
+
+# Configure i3-volume bindings if available
+if [ -f ~/.config/i3/i3-volume/i3volume-pulseaudio.conf ] && [ -f ~/.config/i3/config ]; then
+    if ! grep -q "i3volume\|XF86Audio" ~/.config/i3/config; then
+        cat ~/.config/i3/i3-volume/i3volume-pulseaudio.conf >> ~/.config/i3/config
+    fi
+fi
 
 echo "Setup complete! Reboot and select i3 at login."
+echo "After login: Run lxappearance and select arc-dark theme"
