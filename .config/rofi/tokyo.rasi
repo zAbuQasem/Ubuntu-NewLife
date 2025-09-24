@@ -1,4 +1,5 @@
 * {
+  /* Base palette */
   bg0     : #1a1b26;
   bg1     : #1f2335;
   bg2     : #24283b;
@@ -15,4 +16,11 @@
 
   accent: @red;
   urgent: @yellow;
+
+  /* Semi-transparent variants (ARGB). Increased alpha for less transparency. */
+  /* Previous: CC (~80%). Now: F0 (~94%). Change to E6 for ~90%, FF for opaque. */
+  bg0t: #F01a1b26; /* 94% opacity */
+  bg1t: #F01f2335;
+  bg2t: #F024283b;
+  bg3t: #F0414868;
 }

@@ -37,7 +37,7 @@ configuration {
 window {
 	location:       center;
 	width:          720;            /* Wider to see more of each clipboard line */
-	y-offset:       -80;             /* Slightly higher than main launcher for tall list */
+	y-offset:       -120;             /* Slightly higher than main launcher for tall list */
 	border-radius:  24px;
 
 	border:         1px;
@@ -86,7 +86,7 @@ listview {
 	margin:             12px 0 0;
 	/* Show more history lines */
 	columns:            1;
-	lines:              15;
+	lines:              6;
 	dynamic:            true;  /* Grow if needed */
 	scrollbar:          true;
 	fixed-height:       false;
