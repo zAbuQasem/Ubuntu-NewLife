@@ -166,11 +166,39 @@ exec_always --no-startup-id "setxkbmap -layout us,ar"
 exec_always --no-startup-id nm-applet
 
 # Set xrandr
-exec_always --no-startup-id ~/.config/i3/scripts/homesetup.sh
+exec_always --no-startup-id ~/.config/i3/scripts/xrandr.sh
 
 
-# VM Clipboard Fix (DISABLED)
-# exec_always --no-startup-id ~/.config/i3/clipboard_fix.sh
+#####################
+#### Volume control ####
+#####################
 
-# Vmware ClipBoard fix and file drag&drop (Uncomment when using vm) https://superuser.com/questions/1632506/i3-in-vmware-doesnt-share-clipboard-with-host-windows-machine
-#exec_always --no-startup-id vmware-user-suid-wrapper
+# References:
+# - https://github.com/hastinbe/i3-volume/wiki/Installation#pulseaudio
+
+# Path to volume control, without trailing slash
+set $volumepath ~/i3-volume
+
+# Command for the status line
+#   ie: i3blocks, i3status
+set $statuscmd i3status
+
+# Signal used to update the status line
+#   i3blocks uses SIGRTMIN+10 by default
+#   i3status uses SIGUSR1 by default
+set $statussig SIGUSR1
+
+# Amount to increase/decrease volume as a percentage
+set $volumestep 5
+
+# pulseaudio-utils settings
+#
+# Symbolic name for sink (numeric index not supported)
+#   Recommended: comment out this setting and omit the -s option to use default sink
+#   List sink names: pacmd list-sinks | awk -F "[<>]" '/^\s+name: <.*>/{print $2}'
+#set $sinkname alsa_output.pci-0000_00_1b.0.analog-stereo
+
+# Using pulseaudio-utils (append "-s $sinkname" without quotes to override default sink)
+bindsym XF86AudioRaiseVolume exec --no-startup-id $volumepath/volume -n -t $statuscmd -u $statussig up $volumestep
+bindsym XF86AudioLowerVolume exec --no-startup-id $volumepath/volume -n -t $statuscmd -u $statussig down $volumestep
+bindsym XF86AudioMute        exec --no-startup-id $volumepath/volume -n -t $statuscmd -u $statussig mute
