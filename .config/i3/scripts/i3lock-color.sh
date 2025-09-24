@@ -2,26 +2,11 @@
 
 # Pick a theme by exporting I3LOCK_THEME before running this script.
 # Supported: catppuccin, nord, gruvbox, tokyo, dracula
-# If not set, pick one at random each run (POSIX sh-compatible randomness).
+# Default is fixed to 'tokyo' (no random selection) for faster startup.
 if [ -n "$I3LOCK_THEME" ]; then
 	THEME="$I3LOCK_THEME"
 else
-	THEMES="catppuccin nord gruvbox tokyo dracula"
-	# Prefer /dev/urandom via od for randomness; fallback to awk srand()
-	if command -v od >/dev/null 2>&1; then
-		idx=$(od -An -N2 -tu2 /dev/urandom 2>/dev/null | tr -d ' ')
-		idx=$(( (idx % 5) + 1 ))
-	else
-		idx=$(awk 'BEGIN{srand(); print int(1+rand()*5)}')
-	fi
-	i=1
-	for t in $THEMES; do
-		if [ "$i" -eq "$idx" ]; then
-			THEME="$t"
-			break
-		fi
-		i=$((i+1))
-	done
+	THEME="tokyo"
 fi
 
 case "$THEME" in
