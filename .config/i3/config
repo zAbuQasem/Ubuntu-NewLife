@@ -165,6 +165,10 @@ exec_always --no-startup-id "setxkbmap -layout us,ar"
 # Wifi Manager
 exec_always --no-startup-id nm-applet
 
+# Set xrandr
+exec_always --no-startup-id ~/.config/i3/scripts/homesetup.sh
+
+
 # VM Clipboard Fix (DISABLED)
 # exec_always --no-startup-id ~/.config/i3/clipboard_fix.sh
 
