@@ -9,7 +9,7 @@ echo "Installing i3 and packages..."
 sudo apt update && sudo apt upgrade -y
 sudo apt install -y \
     i3 i3blocks rofi feh arc-theme papirus-icon-theme \
-    alacritty git lxappearance brightnessctl \
+    git lxappearance brightnessctl \
     network-manager x11-xserver-utils \
     numlockx unclutter \
     compton nitrogen \
@@ -21,13 +21,10 @@ sudo apt install -y \
 echo "Setting up configuration..."
 mkdir -p ~/.config/{i3,rofi,alacritty} ~/.local/share/fonts
 
-# Copy config files if they exist
-[ -f "$SCRIPT_DIR/.config/i3/config" ] && cp "$SCRIPT_DIR/.config/i3/config" ~/.config/i3/
-[ -f "$SCRIPT_DIR/.config/alacritty/alacritty.toml" ] && cp "$SCRIPT_DIR/.config/alacritty/alacritty.toml" ~/.config/alacritty/
-[ -f "$SCRIPT_DIR/.config/i3/i3blocks.conf" ] && cp "$SCRIPT_DIR/.config/i3/i3blocks.conf" ~/.config/i3/
-[ -f "$SCRIPT_DIR/.config/rofi/config.rasi" ] && cp "$SCRIPT_DIR/.config/rofi/config.rasi" ~/.config/rofi/
+# Copy all config files at once
+[ -d "$SCRIPT_DIR/.config" ] && cp -a "$SCRIPT_DIR/.config/." ~/.config/
 [ -f "$SCRIPT_DIR/.fehbg" ] && cp "$SCRIPT_DIR/.fehbg" ~/
-[ -d "$SCRIPT_DIR/wallpaper" ] && cp -r "$SCRIPT_DIR/wallpaper" ~/.wallpaper
+[ -d "$SCRIPT_DIR/wallpaper" ] && cp -a "$SCRIPT_DIR/wallpaper" ~/.wallpaper
 
 # Install i3-gaps if you want gaps functionality
 echo "Installing i3-gaps..."
@@ -98,25 +95,8 @@ if [ ! -f /usr/local/bin/greenclip ]; then
     rm /tmp/greenclip
 fi
 
-# Copy additional config files
-[ -f "$SCRIPT_DIR/.config/compton/compton.conf" ] && {
-    mkdir -p ~/.config/compton
-    cp "$SCRIPT_DIR/.config/compton/compton.conf" ~/.config/compton/
-}
-
-[ -f "$SCRIPT_DIR/.config/rofi/theme.rasi" ] && cp "$SCRIPT_DIR/.config/rofi/theme.rasi" ~/.config/rofi/
-
-[ -f "$SCRIPT_DIR/.config/i3/clipboard_fix.sh" ] && {
-    cp "$SCRIPT_DIR/.config/i3/clipboard_fix.sh" ~/.config/i3/
-    chmod +x ~/.config/i3/clipboard_fix.sh
-}
-
-[ -f "$SCRIPT_DIR/.config/i3/battery-plus" ] && {
-    cp "$SCRIPT_DIR/.config/i3/battery-plus" ~/.config/i3/
-    chmod +x ~/.config/i3/battery-plus
-}
-
-[ -f "$SCRIPT_DIR/.config/greenclip/config" ] && cp "$SCRIPT_DIR/.config/greenclip/config" ~/.config/greenclip/
+# Make executable scripts executable
+chmod +x ~/.config/i3/clipboard_fix.sh ~/.config/i3/battery-plus 2>/dev/null || true
 
 # Configure i3-volume bindings if available
 if [ -f ~/.config/i3/i3-volume/i3volume-pulseaudio.conf ] && [ -f ~/.config/i3/config ]; then
