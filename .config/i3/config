@@ -95,7 +95,7 @@ bindsym $mod+r mode "resize"
 # i3bar with i3blocks
 bar {
     status_command i3blocks -c ~/.config/i3/i3blocks.conf
-    i3bar_command i3bar -t
+    i3bar_command i3bar
     position top
     height 26
     font pango:RobotoMono Nerd Font Regular 12
