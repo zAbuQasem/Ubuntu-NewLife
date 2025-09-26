@@ -25,6 +25,9 @@ bindsym $mod+d exec --no-startup-id rofi -show drun -config ~/.config/rofi/confi
 # Open ClipBoard
 bindsym $mod+v exec --no-startup-id rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}' -config ~/.config/rofi/clipboard.rasi
 
+# VPN Toggle (MetaCTF) - requires ~/.config/i3/scripts/toggle-vpn.sh (executable)
+bindsym $mod+Shift+v exec --no-startup-id ~/.config/i3/scripts/toggle-vpn.sh
+
 # Use the cursor keys:
 bindsym $mod+Left focus left
 bindsym $mod+Down focus down
