@@ -170,18 +170,17 @@ workspace 4 output DP-1
 workspace 0 output DP-1
 
 
-# Open firefox on workspace 1 on startup
-exec_always --no-startup-id i3-msg "workspace 1; exec firefox"
+# Application-to-workspace assignment (prevents focus jumping during startup)
+assign [class="(?i)firefox"] 1
+assign [class="(?i)discord"] 2
+assign [class="(?i)alacritty"] 3
+assign [class="(?i)code"] 4
 
-# open discord on workspace 2 on startup
-exec_always --no-startup-id i3-msg "workspace 2; exec discord"
-
-# Open terminal on workspace 3 on startup
-exec_always --no-startup-id i3-msg "workspace 3; exec alacritty"
-
-# Open vsCode on workspace 4 on startup
-exec_always --no-startup-id i3-msg "workspace 4; exec code"
-
+# Autostart core applications (no exec_always to avoid duplicates on config reload)
+exec --no-startup-id sh -c 'pgrep -x firefox >/dev/null || firefox'
+exec --no-startup-id sh -c 'pgrep -x discord >/dev/null || discord'
+exec --no-startup-id sh -c 'pgrep -x alacritty >/dev/null || alacritty'
+exec --no-startup-id sh -c 'pgrep -x code >/dev/null || code'
 
 
 # Enable NumLock on startup
