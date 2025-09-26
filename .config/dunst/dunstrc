@@ -1,84 +1,73 @@
 [global]
-    # Make the width 3740 (3840 - 100), have 50 left margin and 95 above
-    geometry = "350x5-10+38"
     monitor = 0
     follow = keyboard
-    indicate_hidden = yes
-    shrink = yes
-    transparency = 10
+    geometry = "360x0-5+30"
+    shrink = no
+    transparency = 0
     notification_height = 0
-    # Show multiple notifications in the same box
-    separator_height = 2
+    separator_height = 0
+    padding = 16
+    horizontal_padding = 18
+    text_icon_padding = 10
+    frame_width = 2
+    frame_color = "#82C8FF"
     separator_color = frame
     sort = yes
-
-    # Add vertical padding to the inside of the notification
-    padding = 14
-
-    # Add horizontal padding for when the text gets long enough
-    horizontal_padding = 14
-
-    # The frame color and width of the notification
-    frame_color = "#0f161f"
-    frame_width = 2
-    line_height = 0
-
-    # How long a user needs to be idle for sticky notifications
-    idle_threshold = 120
-
-    # Font and typography settings
-    icon_path = /usr/share/icons/Papirus/48x48/status/:/usr/share/icons/Papirus/48x48/devices/:/usr/share/icons/Papirus/48x48/apps
-    font = Hermit 10
-    alignment = center
-    show_age_threshold = 60
+    idle_threshold = 90
+    font = RobotoMono Nerd Font 10
+    line_height = 2
+    markup = full
+    format = "<span foreground='#E6FFF5' weight='bold'>%s</span>\n<span foreground='#C9D1EE'>%b</span>"
+    alignment = left
+    vertical_alignment = center
+    show_age_threshold = 120
     ellipsize = middle
     ignore_newline = no
-    stack_duplicates = true
-    hide_duplicate_count = true
+    word_wrap = yes
+    stack_duplicates = yes
+    hide_duplicate_count = no
     show_indicators = yes
     icon_position = left
-    max_icon_size = 40
+    min_icon_size = 32
+    max_icon_size = 96
+    icon_path = /usr/share/icons/Paper/16x16/status/:/usr/share/icons/Paper/16x16/devices/:/usr/share/icons/Paper/16x16/apps/
     sticky_history = yes
-    history_length = 20
-    dmenu = /usr/bin/dmenu -p dunst:
-    browser = /usr/bin/firefox -new-tab
-
-    # Always run rule-defined scripts, even if the notification is suppressed
+    history_length = 30
+    dmenu = rofi -dmenu -i -theme ~/.config/rofi/config.rasi
+    browser = /usr/bin/xdg-open
     always_run_script = true
-
-    title = Dunst
-    class = Dunst
-    startup_notification = false
-    force_xinerama = false
-    word_wrap = yes
-
-    # Format for how notifications will be displayed
-    # Usage: `notify-send 'Title' 'Summary'`
-    format = "<b>%s</b>: %b"
-
-    # Allow some HTML tags like <i> and <u> in notifications
-    markup = full
-
-# These are the keybindings used to control dunst notifications
-[shortcuts]
+    ignore_dbusclose = no
+    force_xinerama = no
+    mouse_left_click = close_current
+    mouse_middle_click = do_action
+    mouse_right_click = close_all
     close = ctrl+space
     close_all = ctrl+shift+space
     history = ctrl+grave
+    context = ctrl+shift+period
 
-# Set the background and foreground (text) color for all notifications
 [urgency_low]
-background = "#09090d"
-foreground = "#839496"
-timeout = 5
+    background = "#1C1D2BE6"
+    foreground = "#A7B4D4"
+    frame_color = "#2C2F44"
+    highlight = "#82C8FF"
+    timeout = 4
+    default_icon = dialog-information
 
 [urgency_normal]
-background = "#09090d"
-foreground = "#839496"
-timeout = 5
+    background = "#1F2236F2"
+    foreground = "#E6FFF5"
+    frame_color = "#82C8FF"
+    highlight = "#82C8FF"
+    timeout = 7
+    override_pause_level = 30
+    default_icon = dialog-information
 
 [urgency_critical]
-background = "#09090d"
-foreground = "#8c5780"
-timeout = 0
-# vim:ft=cfg
-
+    background = "#3E1B21F2"
+    foreground = "#FFEDEE"
+    frame_color = "#FF6B6B"
+    highlight = "#FF6B6B"
+    timeout = 0
+    override_pause_level = 60
+    default_icon = dialog-warning
