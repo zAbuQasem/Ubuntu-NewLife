@@ -131,12 +131,17 @@ client.unfocused #333333 #333333 #888888
 client.urgent #900000 #900000 #ffffff
 default_border normal
 
+
+# Disable focus on mouse hover
+focus_follows_mouse no
+
+
 # screenshot
 bindsym $mod+P exec flameshot gui
 
 # Brightness control
 bindsym XF86MonBrightnessUp exec brightnessctl set +5% # increase screen brightness
-bindsym XF86MonBrightnessDown exec brightnessctl set 5%- # decrease scrPeen brightness
+bindsym XF86MonBrightnessDown exec brightnessctl set 5%- # decrease screen brightness
 
 # Display/Monitor auto configuration
 bindsym $mod+m exec --no-startup-id arandr
@@ -153,6 +158,31 @@ mode "$mode_system" {
 }
 
 bindsym $mod+BackSpace mode "$mode_system"
+
+# Set xrandr
+exec_always --no-startup-id ~/.config/i3/scripts/xrandr.sh
+
+# make  the first 2 workspaces for the HDMI-1-0 and other workspaces for the DP-1
+workspace 1 output HDMI-1-0
+workspace 2 output HDMI-1-0
+workspace 3 output DP-1
+workspace 4 output DP-1
+workspace 0 output DP-1
+
+
+# Open firefox on workspace 1 on startup
+exec_always --no-startup-id i3-msg "workspace 1; exec firefox"
+
+# open discord on workspace 2 on startup
+exec_always --no-startup-id i3-msg "workspace 2; exec discord"
+
+# Open terminal on workspace 3 on startup
+exec_always --no-startup-id i3-msg "workspace 3; exec alacritty"
+
+# Open vsCode on workspace 4 on startup
+exec_always --no-startup-id i3-msg "workspace 4; exec code"
+
+
 
 # Enable NumLock on startup
 exec_always --no-startup-id numlockx on
@@ -172,18 +202,6 @@ exec_always --no-startup-id "setxkbmap -layout us,ar"
 
 # Wifi Manager
 exec_always --no-startup-id nm-applet
-
-# Set xrandr
-exec_always --no-startup-id ~/.config/i3/scripts/xrandr.sh
-
-
-# Open firefox on workspace 1 on startup
-exec_always --no-startup-id i3-msg "workspace 1; exec firefox"
-# Open terminal on workspace 2 on startup
-exec_always --no-startup-id i3-msg "workspace 2; exec alacritty"
-# open discord on workspace 10 on startup
-exec_always --no-startup-id i3-msg "workspace 0; exec discord"
-
 
 #####################
 #### Volume control ####
