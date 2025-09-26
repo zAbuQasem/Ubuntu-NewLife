@@ -138,7 +138,6 @@ default_border normal
 # Disable focus on mouse hover
 focus_follows_mouse no
 
-
 # screenshot
 bindsym $mod+P exec flameshot gui
 
@@ -174,14 +173,14 @@ workspace 0 output DP-1
 
 
 # Application-to-workspace assignment (prevents focus jumping during startup)
+assign [class="(?i)discord"] 0
 assign [class="(?i)firefox"] 1
-assign [class="(?i)discord"] 2
 assign [class="(?i)alacritty"] 3
 assign [class="(?i)code"] 4
 
 # Autostart core applications (no exec_always to avoid duplicates on config reload)
 exec --no-startup-id sh -c 'pgrep -x firefox >/dev/null || firefox'
-exec --no-startup-id sh -c 'pgrep -x discord >/dev/null || discord'
+exec --no-startup-id sh -c 'pgrep -x discord >/dev/null || discord &'
 exec --no-startup-id sh -c 'pgrep -x alacritty >/dev/null || alacritty'
 exec --no-startup-id sh -c 'pgrep -x code >/dev/null || code'
 
