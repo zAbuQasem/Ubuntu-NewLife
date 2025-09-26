@@ -186,6 +186,9 @@ exec --no-startup-id sh -c 'pgrep -x alacritty >/dev/null || alacritty'
 exec --no-startup-id sh -c 'pgrep -x code >/dev/null || code'
 
 
+# Enable dunst notifications
+exec --no-startup-id dunst &
+
 # Enable NumLock on startup
 exec_always --no-startup-id numlockx on
 
@@ -204,6 +207,9 @@ exec_always --no-startup-id "setxkbmap -layout us,ar"
 
 # Wifi Manager
 exec_always --no-startup-id nm-applet
+
+# Bluetooth Manager
+exec_always --no-startup-id blueman-applet
 
 #####################
 #### Volume control ####

@@ -1,11 +1,12 @@
 [global]
     monitor = 0
     follow = keyboard
-    geometry = "360x0-5+32"
+    geometry = "360x0-6+32"
     shrink = no
     transparency = 0
+    notification_limit = 5
     notification_height = 0
-    separator_height = 0
+    separator_height = 1
     padding = 16
     horizontal_padding = 18
     text_icon_padding = 10
@@ -14,7 +15,7 @@
     separator_color = frame
     sort = yes
     idle_threshold = 90
-    font = RobotoMono Nerd Font 10
+    font = RobotoMono Nerd Font 11.5
     line_height = 2
     markup = full
     format = "<span foreground='#E6FFF5' weight='bold'>%s</span>\n<span foreground='#C9D1EE'>%b</span>"
@@ -25,11 +26,11 @@
     ignore_newline = no
     word_wrap = yes
     stack_duplicates = yes
-    hide_duplicate_count = no
+    hide_duplicate_count = yes
     show_indicators = yes
     icon_position = left
-    min_icon_size = 32
-    max_icon_size = 96
+    min_icon_size = 30
+    max_icon_size = 30
     icon_path = /usr/share/icons/Paper/16x16/status/:/usr/share/icons/Paper/16x16/devices/:/usr/share/icons/Paper/16x16/apps/
     sticky_history = yes
     history_length = 30
@@ -51,7 +52,7 @@
     foreground = "#A7B4D4"
     frame_color = "#2C2F44"
     highlight = "#82C8FF"
-    timeout = 4
+    timeout = 2
     default_icon = dialog-information
 
 [urgency_normal]
@@ -59,7 +60,7 @@
     foreground = "#E6FFF5"
     frame_color = "#82C8FF"
     highlight = "#82C8FF"
-    timeout = 7
+    timeout = 3
     override_pause_level = 30
     default_icon = dialog-information
 

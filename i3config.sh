@@ -34,7 +34,7 @@ sudo apt install -y meson ninja-build libxcb-shape0-dev libxcb-keysyms1-dev \
     libxcb-randr0-dev libxcb-xrm0 libxcb-xrm-dev autoconf gcc make pkg-config \
     libpam0g-dev libcairo2-dev libfontconfig1-dev libxcb-composite0-dev \
     libx11-xcb-dev libxcb-xkb-dev libxcb-image0-dev libxkbcommon-x11-dev \
-    libjpeg-dev libgif-dev
+    libjpeg-dev libgif-dev blueman
 
 if [ ! -d "i3-gaps" ]; then
     git clone https://github.com/Airblader/i3 i3-gaps
