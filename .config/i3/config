@@ -177,6 +177,14 @@ exec_always --no-startup-id nm-applet
 exec_always --no-startup-id ~/.config/i3/scripts/xrandr.sh
 
 
+# Open firefox on workspace 1 on startup
+exec_always --no-startup-id i3-msg "workspace 1; exec firefox"
+# Open terminal on workspace 2 on startup
+exec_always --no-startup-id i3-msg "workspace 2; exec alacritty"
+# open discord on workspace 10 on startup
+exec_always --no-startup-id i3-msg "workspace 0; exec discord"
+
+
 #####################
 #### Volume control ####
 #####################
