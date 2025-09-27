@@ -173,20 +173,22 @@ workspace 0 output DP-1
 
 
 # Application-to-workspace assignment (prevents focus jumping during startup)
-assign [class="(?i)discord"] 0
 assign [class="(?i)firefox"] 1
 assign [class="(?i)alacritty"] 3
 assign [class="(?i)code"] 4
 
 # Autostart core applications (no exec_always to avoid duplicates on config reload)
 exec --no-startup-id sh -c 'pgrep -x firefox >/dev/null || firefox'
-exec --no-startup-id sh -c 'pgrep -x discord >/dev/null || discord &'
+exec --no-startup-id sh -c 'pgrep -x discord >/dev/null || discord'
 exec --no-startup-id sh -c 'pgrep -x alacritty >/dev/null || alacritty'
 exec --no-startup-id sh -c 'pgrep -x code >/dev/null || code'
-
+exec --no-startup-id sh -c 'pgrep -x geary >/dev/null || geary --hidden &'
 
 # Enable dunst notifications
-exec --no-startup-id dunst &
+exec_always --no-startup-id dunst &
+
+# Run geary
+exec_always --no-startup-id geary &
 
 # Enable NumLock on startup
 exec_always --no-startup-id numlockx on
