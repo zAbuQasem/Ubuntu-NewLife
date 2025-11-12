@@ -10,7 +10,7 @@ fi
 unsetopt autocd
 # Path to your oh-my-zsh installation.
 export ZSH="/home/${USER}/.oh-my-zsh"
-export PAGER="most"
+#export PAGER="most"
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -84,7 +84,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git kube-ps1 tmux fzf ssh-agent zsh-syntax-highlighting zsh-autosuggestions web-search)
+plugins=(git gcloud kube-ps1 tmux fzf ssh-agent zsh-syntax-highlighting zsh-autosuggestions web-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -176,15 +176,15 @@ Httpx-p() { print -z `(echo 'httpx -sc -fr -location -title -server -td -method 
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH="${PATH}:${HOME}/.local/bin/"
+# PATH Configuration - consolidated to avoid duplicates
 export GOPATH=$HOME/go
-export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin:$HOME/.local/bin:$PATH:/snap/bin:$HOME/.cargo/env:$HOME/.cargo/bin/
-export PATH="${KREW_ROOT:-$HOME/.krew}/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:/opt/nvim-linux-x86_64/bin:${KREW_ROOT:-$HOME/.krew}/bin:/usr/local/go/bin:$HOME/go/bin:$HOME/.cargo/bin:/snap/bin:$HOME/.iximiuz/labctl/bin:$PATH"
 
 # General aliases
-alias vim='/usr/bin/nvim'
+alias vim='nvim'
 alias ؤمثشق='clear'
 alias c="xclip -sel clip"
+alias ls="lsd"
 alias cat='batcat'
 alias gip="grep -oE '\b([0-9]{1,3}\.){3}[0-9]{1,3}\b'"
 
@@ -195,6 +195,8 @@ alias pullall='for dir in */; do if [ -d "$dir/.git" ]; then echo -e "\e[32m[+] 
 # Kubernetes aliases
 source <(kubectl completion zsh)
 source <(helm completion zsh)
+source <(argocd completion zsh)
+source <(labctl completion zsh)
 compdef kubecolor=kubectl
 alias k="kubecolor"
 alias ktx="kubectl config use-context"
@@ -203,7 +205,8 @@ alias argocd-creds='kubectl -n argocd get secret argocd-initial-admin-secret -o 
 alias argocd-expose="kubectl port-forward service/argo-cd-argocd-server -n argocd 8080:443 -n argocd"
 
 # Terraform and Packer aliases
-alias tfmt='terraform fmt -recursive -check'
+alias tf="terraform"
+alias tfmt='terraform fmt -recursive -write=true'
 alias pfmt='echo "Formatting with packer fmt -recursive=true ."; packer fmt -recursive=true .'
 
 # Docker aliases
@@ -348,12 +351,10 @@ ctf_init(){
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 function rtfm() { ~/tools/rtfm/rtfm.py "$@" 2>/dev/null }
-source <(argocd completion zsh)
-source <(helm completion zsh)
 
 fpath=(/home/${USER}/.oh-my-zsh/custom/completions /home/${USER}/.oh-my-zsh/custom/plugins/zsh-autosuggestions /home/${USER}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting /home/${USER}/.oh-my-zsh/plugins/ssh-agent /home/${USER}/.oh-my-zsh/plugins/fzf /home/${USER}/.oh-my-zsh/plugins/tmux /home/${USER}/.oh-my-zsh/plugins/command-not-found /home/${USER}/.oh-my-zsh/plugins/git /home/${USER}/.oh-my-zsh/functions /home/${USER}/.oh-my-zsh/completions /home/${USER}/.oh-my-zsh/cache/completions /usr/local/share/zsh/site-functions /usr/share/zsh/vendor-functions /usr/share/zsh/vendor-completions /usr/share/zsh/functions/Calendar /usr/share/zsh/functions/Chpwd /usr/share/zsh/functions/Completion /usr/share/zsh/functions/Completion/AIX /usr/share/zsh/functions/Completion/BSD /usr/share/zsh/functions/Completion/Base /usr/share/zsh/functions/Completion/Cygwin /usr/share/zsh/functions/Completion/Darwin /usr/share/zsh/functions/Completion/Debian /usr/share/zsh/functions/Completion/Linux /usr/share/zsh/functions/Completion/Mandriva /usr/share/zsh/functions/Completion/Redhat /usr/share/zsh/functions/Completion/Solaris /usr/share/zsh/functions/Completion/Unix /usr/share/zsh/functions/Completion/X /usr/share/zsh/functions/Completion/Zsh /usr/share/zsh/functions/Completion/openSUSE /usr/share/zsh/functions/Exceptions /usr/share/zsh/functions/MIME /usr/share/zsh/functions/Math /usr/share/zsh/functions/Misc /usr/share/zsh/functions/Newuser /usr/share/zsh/functions/Prompts /usr/share/zsh/functions/TCP /usr/share/zsh/functions/VCS_Info /usr/share/zsh/functions/VCS_Info/Backends /usr/share/zsh/functions/Zftp /usr/share/zsh/functions/Zle)
 
-export PATH=/home/${USER}/bin:$PATH
+export PATH=/home/${USER}/bin:/opt/nvim-linux-x86_64/bin:$PATH
 
 [[ -e "/home/${USER}/lib/oracle-cli/lib/python3.10/site-packages/oci_cli/bin/oci_autocomplete.sh" ]] && source "/home/${USER}/lib/oracle-cli/lib/python3.10/site-packages/oci_cli/bin/oci_autocomplete.sh"
 
